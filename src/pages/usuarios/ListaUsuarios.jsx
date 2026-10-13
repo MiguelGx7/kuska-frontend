@@ -4,12 +4,11 @@ import { obtenerMensajeError } from '../../api/errores'
 import { listarUsuarios } from '../../api/usuarios'
 import Aviso from '../../components/Aviso'
 import Badge from '../../components/Badge'
+import BarraFiltros from '../../components/BarraFiltros'
 import Boton from '../../components/Boton'
-import Buscador from '../../components/Buscador'
 import Esqueleto from '../../components/Esqueleto'
 import HormigaVacia from '../../components/HormigaVacia'
 import Paginacion from '../../components/Paginacion'
-import Selector from '../../components/Selector'
 import Tarjeta from '../../components/Tarjeta'
 import { useCarga } from '../../hooks/useCarga'
 import { useFiltrosUrl } from '../../hooks/useFiltrosUrl'
@@ -68,29 +67,32 @@ export default function ListaUsuarios() {
         subtitulo="Donantes, beneficiarios y administradores de Kumora."
       />
 
-      <Tarjeta className="lista usuarios">
-        <div className="lista__panel usuarios__panel">
-          <div className="usuarios__barra">
-            <Buscador
-              className="usuarios__buscador"
-              valor={texto}
-              alCambiar={setTexto}
-              placeholder="Buscar por nombre, correo o documento"
-              etiqueta="Buscar usuarios"
-            />
-            <Selector
-              etiquetaOculta="Rol"
-              opciones={ROLES}
-              valor={valores.rol}
-              alCambiar={(v) => cambiarFiltro('rol', v)}
-            />
-            <Selector
-              etiquetaOculta="Estado"
-              opciones={ESTADOS}
-              valor={valores.estado}
-              alCambiar={(v) => cambiarFiltro('estado', v)}
-            />
-          </div>
+      <Tarjeta className="lista lista--sin-pestanas">
+        <div className="lista__panel">
+          <BarraFiltros
+            busqueda={{
+              valor: texto,
+              alCambiar: setTexto,
+              placeholder: 'Buscar por nombre, correo o documento',
+              etiqueta: 'Buscar usuarios',
+            }}
+            filtros={[
+              {
+                clave: 'rol',
+                etiqueta: 'Rol',
+                opciones: ROLES,
+                valor: valores.rol,
+                alCambiar: (v) => cambiarFiltro('rol', v),
+              },
+              {
+                clave: 'estado',
+                etiqueta: 'Estado',
+                opciones: ESTADOS,
+                valor: valores.estado,
+                alCambiar: (v) => cambiarFiltro('estado', v),
+              },
+            ]}
+          />
 
           {lista.estado === 'error' && (
             <Aviso

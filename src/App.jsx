@@ -24,7 +24,7 @@ const SolicitudDetalle = lazy(() => import('./pages/solicitudes/DetalleSolicitud
 const Novedades = lazy(() => import('./pages/novedades/Novedades'))
 const Usuarios = lazy(() => import('./pages/usuarios/ListaUsuarios'))
 const UsuarioDetalle = lazy(() => import('./pages/usuarios/DetalleUsuario'))
-const Sanciones = lazy(() => import('./pages/Sanciones'))
+const Sanciones = lazy(() => import('./pages/sanciones/Sanciones'))
 const Categorias = lazy(() => import('./pages/Categorias'))
 const Configuracion = lazy(() => import('./pages/Configuracion'))
 const Notificaciones = lazy(() => import('./pages/Notificaciones'))

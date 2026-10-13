@@ -9,7 +9,7 @@ export default function UltimasNotificaciones({ carga }) {
 
   return (
     <Tarjeta
-      className="notificaciones"
+      className="resumen-notificaciones"
       titulo="Últimas notificaciones"
       accion={
         <Boton variante="enlace" to="/notificaciones">
@@ -32,18 +32,18 @@ export default function UltimasNotificaciones({ carga }) {
       )}
 
       {estado === 'listo' && datos.length > 0 && (
-        <ul className="notificaciones__lista">
+        <ul className="resumen-notificaciones__lista">
           {datos.map((n) => (
-            <li key={n.id} className="notificaciones__item">
+            <li key={n.id} className="resumen-notificaciones__item">
               <span
-                className={`notificaciones__punto ${n.leida ? '' : 'notificaciones__punto--nueva'}`}
+                className={`resumen-notificaciones__punto ${n.leida ? '' : 'resumen-notificaciones__punto--nueva'}`}
               />
               <div>
-                <p className="notificaciones__mensaje">
+                <p className="resumen-notificaciones__mensaje">
                   {!n.leida && <span className="visualmente-oculto">Sin leer: </span>}
                   {n.mensaje}
                 </p>
-                <p className="notificaciones__fecha">{fechaRelativa(n.fecha)}</p>
+                <p className="resumen-notificaciones__fecha">{fechaRelativa(n.fecha)}</p>
               </div>
             </li>
           ))}

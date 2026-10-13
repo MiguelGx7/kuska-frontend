@@ -17,16 +17,16 @@ export default function PorCategoria({ carga }) {
 
   return (
     <Tarjeta
-      className="categorias"
+      className="resumen-categorias"
       titulo="Por categoría"
       subtitulo="Alimentos entregados de los donados"
     >
       {estado === 'error' && <ErrorSeccion carga={carga} />}
 
       {estado === 'cargando' && (
-        <div className="categorias__lista" aria-busy="true">
+        <div className="resumen-categorias__lista" aria-busy="true">
           {[0, 1, 2, 3, 4].map((i) => (
-            <div key={i} className="categorias__item">
+            <div key={i} className="resumen-categorias__item">
               <Esqueleto alto={14} ancho="70%" />
               <Esqueleto alto={8} />
             </div>
@@ -50,23 +50,23 @@ export default function PorCategoria({ carga }) {
           {categorias.length === 0 ? (
             <p className="resumen__vacio">Todavía no hay alimentos donados.</p>
           ) : (
-            <ul className="categorias__lista">
+            <ul className="resumen-categorias__lista">
               {categorias.map((c) => (
-                <li key={c.categoria_id ?? c.categoria} className="categorias__item">
-                  <div className="categorias__fila">
-                    <span className="categorias__nombre">{c.categoria}</span>
-                    <span className="categorias__valor">
+                <li key={c.categoria_id ?? c.categoria} className="resumen-categorias__item">
+                  <div className="resumen-categorias__fila">
+                    <span className="resumen-categorias__nombre">{c.categoria}</span>
+                    <span className="resumen-categorias__valor">
                       {formatearNumero(c.alimentos_entregados)} de{' '}
                       {formatearNumero(c.alimentos_donados)}
                     </span>
                   </div>
-                  <div className="categorias__barra" aria-hidden="true">
+                  <div className="resumen-categorias__barra" aria-hidden="true">
                     <span
-                      className="categorias__donados"
+                      className="resumen-categorias__donados"
                       style={{ width: porcentaje(c.alimentos_donados, maximo) }}
                     />
                     <span
-                      className="categorias__entregados"
+                      className="resumen-categorias__entregados"
                       style={{ width: porcentaje(c.alimentos_entregados, maximo) }}
                     />
                   </div>

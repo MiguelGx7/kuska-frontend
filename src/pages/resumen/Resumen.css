@@ -253,11 +253,11 @@
 
 /* ---- 3b. Por categoría ---- */
 
-.categorias {
+.resumen-categorias {
   flex: 1 1 320px;
 }
 
-.categorias__lista {
+.resumen-categorias__lista {
   display: flex;
   flex-direction: column;
   gap: 14px;
@@ -266,31 +266,31 @@
   list-style: none;
 }
 
-.categorias__item {
+.resumen-categorias__item {
   display: flex;
   flex-direction: column;
   gap: 6px;
 }
 
-.categorias__fila {
+.resumen-categorias__fila {
   display: flex;
   justify-content: space-between;
   gap: 12px;
   font-size: 14px;
 }
 
-.categorias__nombre {
+.resumen-categorias__nombre {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.categorias__valor {
+.resumen-categorias__valor {
   flex-shrink: 0;
   color: var(--text-3);
 }
 
-.categorias__barra {
+.resumen-categorias__barra {
   position: relative;
   height: 8px;
   overflow: hidden;
@@ -298,18 +298,18 @@
   background: var(--border);
 }
 
-.categorias__donados,
-.categorias__entregados {
+.resumen-categorias__donados,
+.resumen-categorias__entregados {
   position: absolute;
   inset: 0 auto 0 0;
   border-radius: 999px;
 }
 
-.categorias__donados {
+.resumen-categorias__donados {
   background: var(--serie-1);
 }
 
-.categorias__entregados {
+.resumen-categorias__entregados {
   background: var(--primary);
 }
 
@@ -322,30 +322,30 @@
 
 /* ---- 4b. Últimas notificaciones ---- */
 
-.notificaciones {
+.resumen-notificaciones {
   flex: 1 1 300px;
 }
 
-.notificaciones__lista {
+.resumen-notificaciones__lista {
   display: flex;
   flex-direction: column;
   padding: 0;
   list-style: none;
 }
 
-.notificaciones__item {
+.resumen-notificaciones__item {
   display: flex;
   gap: 12px;
   padding: 12px 0;
   border-top: 1px solid var(--border);
 }
 
-.notificaciones__item:first-child {
+.resumen-notificaciones__item:first-child {
   padding-top: 0;
   border-top: none;
 }
 
-.notificaciones__punto {
+.resumen-notificaciones__punto {
   flex-shrink: 0;
   width: 8px;
   height: 8px;
@@ -354,21 +354,18 @@
   background: var(--border-strong);
 }
 
-.notificaciones__punto--nueva {
+.resumen-notificaciones__punto--nueva {
   background: var(--primary);
 }
 
-.notificaciones__mensaje {
+.resumen-notificaciones__mensaje {
   font-size: 14px;
   line-height: 1.45;
 }
 
-.notificaciones__fecha {
+.resumen-notificaciones__fecha {
   margin-top: 2px;
   font-size: 12px;
   color: var(--text-3);
 }
 
-.tarjeta__accion .boton--enlace {
-  font-size: 14px;
-}

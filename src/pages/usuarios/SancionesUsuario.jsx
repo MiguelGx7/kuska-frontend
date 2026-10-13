@@ -36,7 +36,7 @@ function LineaSancion({ sancion }) {
 
   if (!relacion && !vigencia) return null
   return (
-    <p className="sancion__linea">
+    <p className="historial-sancion__linea">
       {relacion && <Link to={relacion.ruta}>{relacion.texto}</Link>}
       {relacion && vigencia && ' · '}
       {vigencia}
@@ -104,14 +104,14 @@ export default function SancionesUsuario({ usuario, impacto, datosImpacto, sanci
       {!sinNada && resumen && <p className="sanciones-usuario__resumen">{resumen}</p>}
 
       {lista && lista.length > 0 && (
-        <ul className="sanciones">
+        <ul className="historial-sanciones">
           {lista.map((s) => (
-            <li key={s.id} className="sancion">
-              <div className="sancion__cabecera">
+            <li key={s.id} className="historial-sancion">
+              <div className="historial-sancion__cabecera">
                 <Badge variante={colorEstado('sancion', s.tipo)}>{s.tipo}</Badge>
-                <span className="sancion__fecha">{fechaRelativa(s.fecha_inicio)}</span>
+                <span className="historial-sancion__fecha">{fechaRelativa(s.fecha_inicio)}</span>
               </div>
-              <p className="sancion__motivo">{s.motivo}</p>
+              <p className="historial-sancion__motivo">{s.motivo}</p>
               <LineaSancion sancion={s} />
             </li>
           ))}

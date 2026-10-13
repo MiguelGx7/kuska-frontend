@@ -4,6 +4,15 @@
   padding-top: 8px;
 }
 
+/* Lista sin pestañas (la barra de filtros va arriba): mismo aire que el resto de la tarjeta */
+.lista--sin-pestanas {
+  padding-top: 20px;
+}
+
+.lista--sin-pestanas .lista__panel {
+  padding-top: 0;
+}
+
 .lista__panel {
   display: flex;
   flex-direction: column;

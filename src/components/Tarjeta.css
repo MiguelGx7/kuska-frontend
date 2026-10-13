@@ -35,3 +35,8 @@
 .tarjeta__accion {
   flex-shrink: 0;
 }
+
+/* Enlaces de acción ("Ver todas") en 14px, un poco más chicos que el texto normal */
+.tarjeta__accion .boton--enlace {
+  font-size: 14px;
+}

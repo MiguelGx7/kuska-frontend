@@ -1,0 +1,49 @@
+/* Estilos propios de Sanciones. Lo compartido está en styles/lista.css */
+
+.sanciones__resumen {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.sanciones__cifra {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 16px 20px;
+}
+
+.sanciones__etiqueta {
+  font-size: 13px;
+  color: var(--text-3);
+}
+
+.sanciones__numero {
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.sanciones__motivo {
+  min-width: 220px;
+  max-width: 360px;
+}
+
+.sanciones__relacion {
+  display: inline-block;
+  margin-top: 2px;
+  font-size: 12px;
+}
+
+.vigencia {
+  display: block;
+  font-size: 14px;
+  color: var(--text-3);
+  white-space: nowrap;
+}
+
+.vigencia--activa {
+  color: var(--rojo);
+  font-weight: 600;
+}
