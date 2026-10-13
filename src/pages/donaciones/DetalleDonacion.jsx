@@ -27,12 +27,13 @@ const MIGAS = ['Inicio', 'Donaciones']
 // Estados en los que la donación ya se publicó y pudo recibir solicitudes.
 const CON_SOLICITUDES = ['Validada', 'Agotada', 'Finalizada']
 
-// Alimentos que vencen antes de hoy + margen. Solo importa mientras está Pendiente
-// (es lo que impide validarla) y solo para los alimentos activos.
+// Alimentos que no cumplen el margen. Misma regla que el backend (fecha_minima_vencimiento):
+// un alimento sirve solo si vence DESPUÉS de hoy + margen; vencer ese mismo día ya no alcanza.
+// Solo importa mientras está Pendiente (es lo que impide validarla) y solo para los activos.
 function alimentosFueraDeMargen(donacion, margen) {
   if (donacion.estado !== 'Pendiente' || margen == null) return []
   const limite = sumarDias(hoyBogota(), margen)
-  return alimentosActivos(donacion).filter((a) => a.fecha_vencimiento < limite)
+  return alimentosActivos(donacion).filter((a) => a.fecha_vencimiento <= limite)
 }
 
 export default function DetalleDonacion() {

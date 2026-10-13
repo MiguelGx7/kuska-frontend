@@ -26,7 +26,7 @@ const Usuarios = lazy(() => import('./pages/usuarios/ListaUsuarios'))
 const UsuarioDetalle = lazy(() => import('./pages/usuarios/DetalleUsuario'))
 const Sanciones = lazy(() => import('./pages/sanciones/Sanciones'))
 const Categorias = lazy(() => import('./pages/categorias/Categorias'))
-const Configuracion = lazy(() => import('./pages/Configuracion'))
+const Configuracion = lazy(() => import('./pages/configuracion/Configuracion'))
 const Notificaciones = lazy(() => import('./pages/Notificaciones'))
 
 // La sesión vive dentro del router para poder usar useNavigate al cerrar sesión.
