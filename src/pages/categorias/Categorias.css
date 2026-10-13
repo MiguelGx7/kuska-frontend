@@ -1,0 +1,39 @@
+/* Estilos propios de Categorías: todas las clases llevan el prefijo "categorias-".
+   Lo compartido está en styles/lista.css y en los componentes. */
+
+.categorias-nombre {
+  font-weight: 500;
+}
+
+.categorias-descripcion {
+  min-width: 200px;
+}
+
+.categorias-acciones {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Botón cuadrado de solo ícono */
+.categorias-mas {
+  width: 34px;
+  padding: 0;
+}
+
+.categorias-sin-resultados {
+  padding: 24px 0;
+  text-align: center;
+  font-size: 14px;
+  color: var(--text-3);
+}
+
+.categorias-formulario {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.categorias-formulario .modal__pie {
+  margin-top: 8px;
+}

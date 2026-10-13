@@ -1,10 +1,11 @@
 .barra-filtros {
   display: grid;
-  grid-template-columns: minmax(220px, 400px) repeat(var(--barra-filtros-selects, 0), 210px);
+  /* Las columnas las arma el componente: [inicio] buscador [selects] */
+  grid-template-columns: var(--barra-filtros-columnas, minmax(220px, 400px));
   gap: 12px;
 }
 
-/* En pantallas angostas el buscador ocupa la fila y los selects van de a dos */
+/* En pantallas angostas el buscador ocupa la fila y lo demás va de a dos */
 @media (max-width: 760px) {
   .barra-filtros {
     grid-template-columns: 1fr 1fr;

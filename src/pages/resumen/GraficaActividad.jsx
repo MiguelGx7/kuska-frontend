@@ -9,6 +9,7 @@ import {
   YAxis,
 } from 'recharts'
 import Esqueleto from '../../components/Esqueleto'
+import Segmentado from '../../components/Segmentado'
 import Tarjeta from '../../components/Tarjeta'
 import { mesCorto, mesLargo } from '../../utils/fechas'
 import { formatearNumero } from '../../utils/numeros'
@@ -59,19 +60,12 @@ export default function GraficaActividad({ carga }) {
   const vista = VISTAS.find((v) => v.clave === claveVista)
 
   const selector = (
-    <div className="segmentado" role="group" aria-label="Qué mostrar">
-      {VISTAS.map(({ clave, nombre }) => (
-        <button
-          key={clave}
-          type="button"
-          className="segmentado__opcion"
-          aria-pressed={clave === claveVista}
-          onClick={() => setClaveVista(clave)}
-        >
-          {nombre}
-        </button>
-      ))}
-    </div>
+    <Segmentado
+      etiqueta="Qué mostrar"
+      opciones={VISTAS.map(({ clave, nombre }) => ({ valor: clave, texto: nombre }))}
+      valor={claveVista}
+      alCambiar={setClaveVista}
+    />
   )
 
   return (

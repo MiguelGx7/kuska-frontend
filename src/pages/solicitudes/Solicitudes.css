@@ -96,38 +96,3 @@
 .reclamo__contacto .botones-contacto {
   margin-top: 8px;
 }
-
-/* ---- Menú Sancionar ---- */
-
-.menu__disparador {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-}
-
-.menu {
-  z-index: 45;
-  min-width: 180px;
-  padding: 6px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--r-control);
-  box-shadow: 0 12px 28px rgb(16 24 40 / 0.16);
-}
-
-.menu__opcion {
-  display: flex;
-  align-items: center;
-  height: 36px;
-  padding: 0 10px;
-  border-radius: 6px;
-  color: var(--text);
-  font-size: 14px;
-  text-decoration: none;
-  outline: none;
-  cursor: pointer;
-}
-
-.menu__opcion[data-highlighted] {
-  background: var(--muted);
-}

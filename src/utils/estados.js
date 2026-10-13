@@ -31,6 +31,10 @@ const COLORES = {
     'Bloqueo temporal': 'rojo',
     'Bloqueo permanente': 'rojo',
   },
+  categoria: {
+    Activa: 'verde',
+    Inactiva: 'gris',
+  },
   confirmacion: {
     Pendiente: 'naranja',
     Confirmada: 'verde',
@@ -40,7 +44,7 @@ const COLORES = {
   },
 }
 
-// tipo: donacion | solicitud | novedad | usuario | sancion | confirmacion
+// tipo: donacion | solicitud | novedad | usuario | sancion | categoria | confirmacion
 export function colorEstado(tipo, estado) {
   return COLORES[tipo]?.[estado] ?? 'gris'
 }
