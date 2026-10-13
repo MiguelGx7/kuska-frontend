@@ -84,6 +84,10 @@
   margin-top: 24px;
 }
 
+.modal--ancho {
+  width: min(560px, calc(100vw - 32px));
+}
+
 /* Foto en grande */
 .modal--imagen {
   width: auto;

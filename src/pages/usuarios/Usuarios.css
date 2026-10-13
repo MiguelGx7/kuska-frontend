@@ -1,0 +1,218 @@
+/* Estilos propios de Usuarios. Lo compartido está en styles/lista.css y styles/detalle.css */
+
+/* ---- Lista ---- */
+
+.usuarios {
+  padding-top: 20px;
+}
+
+.usuarios__panel {
+  padding-top: 0;
+}
+
+.usuarios__barra {
+  display: grid;
+  grid-template-columns: minmax(220px, 400px) 190px 190px;
+  gap: 12px;
+}
+
+@media (max-width: 760px) {
+  .usuarios__barra {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .usuarios__buscador {
+    grid-column: 1 / -1;
+  }
+}
+
+.avatar-mini {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--primary-soft);
+  color: var(--on-primary-soft);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.usuarios__bloqueo {
+  display: block;
+  margin-top: 4px;
+  font-size: 12px;
+  color: var(--text-3);
+  white-space: nowrap;
+}
+
+/* ---- Detalle: datos ---- */
+
+.ficha {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+}
+
+.ficha__fila {
+  display: grid;
+  grid-template-columns: 140px minmax(0, 1fr);
+  gap: 12px;
+  padding: 9px 0;
+  border-top: 1px solid var(--border);
+}
+
+.ficha__fila:first-child {
+  padding-top: 0;
+  border-top: none;
+}
+
+.ficha dt {
+  color: var(--text-3);
+}
+
+@media (max-width: 480px) {
+  .ficha__fila {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2px;
+  }
+}
+
+/* ---- Detalle: actividad ---- */
+
+.actividad {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  list-style: none;
+}
+
+.actividad__item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 -10px;
+  padding: 10px;
+  border-radius: var(--r-control);
+  color: var(--text);
+  text-decoration: none;
+}
+
+.actividad__item:hover {
+  background: var(--muted);
+}
+
+.actividad__item:focus-visible {
+  outline: 2px solid var(--primary);
+}
+
+.actividad__textos {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.actividad__titulo {
+  overflow: hidden;
+  font-weight: 500;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.actividad__referencia {
+  font-size: 13px;
+  color: var(--text-3);
+}
+
+.actividad__flecha {
+  flex-shrink: 0;
+  color: var(--text-3);
+}
+
+/* ---- Detalle: sanciones ---- */
+
+.sanciones-usuario__resumen {
+  font-size: 14px;
+  color: var(--text-2);
+}
+
+.sanciones {
+  display: flex;
+  flex-direction: column;
+  margin-top: 16px;
+  padding: 0;
+  list-style: none;
+}
+
+.sancion {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 14px 0;
+  border-top: 1px solid var(--border);
+}
+
+.sancion__cabecera {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.sancion__fecha {
+  font-size: 12px;
+  color: var(--text-3);
+}
+
+.sancion__motivo {
+  font-size: 14px;
+}
+
+.sancion__linea {
+  font-size: 13px;
+  color: var(--text-3);
+}
+
+/* ---- Modales ---- */
+
+.modal__paso {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  color: var(--text-3);
+}
+
+.sancionar,
+.corregir {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.sancionar__texto {
+  font-size: 14px;
+  color: var(--text-2);
+}
+
+.sancionar__texto strong {
+  color: var(--text);
+}
+
+.sancionar__resumen {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+  padding-left: 20px;
+  font-size: 14px;
+}
+
+.sancionar .modal__pie,
+.corregir .modal__pie {
+  margin-top: 8px;
+}

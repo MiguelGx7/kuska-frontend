@@ -1,7 +1,8 @@
-import { useId, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import { obtenerMensajeError } from '../api/errores'
 import Aviso from './Aviso'
 import Boton from './Boton'
+import CampoTexto from './CampoTexto'
 import Modal from './Modal'
 
 const MAXIMO = 255
@@ -24,7 +25,6 @@ export default function ModalTexto({
   tituloError,
   alEnviar,
 }) {
-  const idCampo = useId()
   const refCampo = useRef(null)
   const [texto, setTexto] = useState('')
   const [errorCampo, setErrorCampo] = useState(null)
@@ -69,41 +69,23 @@ export default function ModalTexto({
     }
   }
 
-  const idMensaje = `${idCampo}-mensaje`
-
   return (
     <Modal abierto={abierto} alCambiar={cambiarAbierto} titulo={titulo} descripcion={descripcion}>
       <form onSubmit={enviar} noValidate>
-        <div className={`campo ${errorCampo ? 'campo--error' : ''}`}>
-          <label className="campo__etiqueta" htmlFor={idCampo}>
-            {etiqueta}
-            {!obligatorio && <span className="campo__opcional"> (opcional)</span>}
-          </label>
-          <div className="campo__control campo__control--area">
-            <textarea
-              ref={refCampo}
-              id={idCampo}
-              className="campo__input"
-              value={texto}
-              maxLength={MAXIMO}
-              rows={4}
-              placeholder={placeholder}
-              onChange={(e) => {
-                setTexto(e.target.value)
-                setErrorCampo(null)
-                setErrorApi(null)
-              }}
-              aria-invalid={errorCampo ? true : undefined}
-              aria-describedby={idMensaje}
-            />
-          </div>
-          <div className="campo__pie" id={idMensaje}>
-            {errorCampo && <p className="campo__mensaje">{errorCampo}</p>}
-            <span className="campo__contador">
-              {texto.length}/{MAXIMO}
-            </span>
-          </div>
-        </div>
+        <CampoTexto
+          ref={refCampo}
+          etiqueta={etiqueta}
+          opcional={!obligatorio}
+          valor={texto}
+          maximo={MAXIMO}
+          placeholder={placeholder}
+          error={errorCampo}
+          alCambiar={(valor) => {
+            setTexto(valor)
+            setErrorCampo(null)
+            setErrorApi(null)
+          }}
+        />
 
         {errorApi && (
           <Aviso tipo="error" titulo={tituloError} className="modal__aviso">

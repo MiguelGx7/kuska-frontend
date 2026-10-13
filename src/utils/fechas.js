@@ -145,6 +145,14 @@ export function fechaHoraLarga(iso, ahora = new Date()) {
   return `${conAnio} a las ${hora(p)}`
 }
 
+// "octubre de 2025"
+export function fechaMesAnio(iso) {
+  const fecha = new Date(iso)
+  if (Number.isNaN(fecha.getTime())) return ''
+  const { anio, mes } = partesBogota(fecha)
+  return `${MESES_LARGOS[mes - 1].toLowerCase()} de ${anio}`
+}
+
 // "Martes 13 de octubre"
 export function hoyLargo(ahora = new Date()) {
   const { anio, mes, dia } = partesBogota(ahora)

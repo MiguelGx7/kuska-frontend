@@ -4,7 +4,7 @@ import './Modal.css'
 
 // Diálogo modal (Radix): bloquea el fondo, atrapa el foco y se cierra con Esc.
 // pie: botones de abajo. variante="imagen": para ver una foto en grande
-// (el título queda solo para lectores de pantalla).
+// (el título queda solo para lectores de pantalla). ancho: true para formularios largos.
 export default function Modal({
   abierto,
   alCambiar,
@@ -12,6 +12,7 @@ export default function Modal({
   descripcion,
   pie,
   variante = 'normal',
+  ancho = false,
   children,
 }) {
   const esImagen = variante === 'imagen'
@@ -21,7 +22,7 @@ export default function Modal({
       <Dialog.Portal>
         <Dialog.Overlay className="modal__fondo" />
         <Dialog.Content
-          className={`modal ${esImagen ? 'modal--imagen' : ''}`}
+          className={`modal ${esImagen ? 'modal--imagen' : ''} ${ancho ? 'modal--ancho' : ''}`}
           // Sin descripción, Radix pide decirlo explícitamente.
           {...(descripcion ? {} : { 'aria-describedby': undefined })}
         >

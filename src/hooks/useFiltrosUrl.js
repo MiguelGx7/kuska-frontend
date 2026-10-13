@@ -14,7 +14,10 @@ const ESPERA_BUSQUEDA_MS = 300
 //
 // opciones.limpiarAlCambiar: otros parámetros que se quitan al cambiar de pestaña
 //   (p. ej. ['id'] para soltar el elemento seleccionado).
-export function useFiltrosUrl(pestanas, { limpiarAlCambiar = [] } = {}) {
+// opciones.extras: filtros que no son pestañas (p. ej. ['rol', 'estado'] en selects).
+//   Se leen en `valores` y se cambian con cambiarFiltro(clave, valor).
+// Sin pestañas, se pasa una sola con url: {}.
+export function useFiltrosUrl(pestanas, { limpiarAlCambiar = [], extras = [] } = {}) {
   const [params, setParams] = useSearchParams()
 
   const claves = [...new Set(pestanas.flatMap((p) => Object.keys(p.url)))]
@@ -23,6 +26,7 @@ export function useFiltrosUrl(pestanas, { limpiarAlCambiar = [] } = {}) {
 
   const busqueda = params.get('search') ?? ''
   const pagina = Math.max(1, Number(params.get('page')) || 1)
+  const valores = Object.fromEntries(extras.map((k) => [k, params.get(k) ?? '']))
 
   // Texto del buscador: se escribe al instante y llega a la URL tras 300 ms.
   const [texto, setTexto] = useState(busqueda)
@@ -75,6 +79,17 @@ export function useFiltrosUrl(pestanas, { limpiarAlCambiar = [] } = {}) {
     })
   }
 
+  // Cambia un filtro extra; vacío lo quita. Vuelve a la primera página.
+  function cambiarFiltro(clave, valor) {
+    setParams((actuales) => {
+      const nuevos = new URLSearchParams(actuales)
+      if (valor) nuevos.set(clave, valor)
+      else nuevos.delete(clave)
+      nuevos.delete('page')
+      return nuevos
+    })
+  }
+
   function cambiarPagina(nueva) {
     setParams((actuales) => {
       const nuevos = new URLSearchParams(actuales)
@@ -94,9 +109,12 @@ export function useFiltrosUrl(pestanas, { limpiarAlCambiar = [] } = {}) {
     cambiarPagina,
     id: params.get('id'),
     seleccionar,
+    valores,
+    cambiarFiltro,
     // Parámetros para la API (sin claves vacías).
     paramsApi: {
       ...(pestana.api ?? pestana.url),
+      ...Object.fromEntries(Object.entries(valores).filter(([, v]) => v)),
       ...(busqueda ? { search: busqueda } : {}),
       ...(pagina > 1 ? { page: pagina } : {}),
     },

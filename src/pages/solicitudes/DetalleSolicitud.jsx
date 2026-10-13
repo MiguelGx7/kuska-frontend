@@ -21,6 +21,7 @@ import EncabezadoPagina from '../../layout/EncabezadoPagina'
 import { useContadores } from '../../layout/useContadores'
 import { colorEstado } from '../../utils/estados'
 import { fechaHoraLarga, fechaRelativa } from '../../utils/fechas'
+import { conPuntoFinal } from '../../utils/texto'
 import AlimentosPedidos from './AlimentosPedidos'
 import AvisosSolicitud from './AvisosSolicitud'
 import LateralSolicitud from './LateralSolicitud'
@@ -135,12 +136,12 @@ export default function DetalleSolicitud() {
     try {
       const actualizada = await aprobarSolicitud(id)
       const limite = fechaHoraLarga(actualizada.fecha_limite_recogida)
-      // La hora ya termina en "a. m." / "p. m.": no se repite el punto final.
-      const cierre = limite.endsWith('.') ? '' : '.'
       terminarAccion(
-        actualizada.modalidad_entrega === 'Domicilio'
-          ? `Solicitud aprobada. El donante debe entregarla antes del ${limite}${cierre}`
-          : `Solicitud aprobada. ${nombre} debe recogerla antes del ${limite}${cierre}`,
+        conPuntoFinal(
+          actualizada.modalidad_entrega === 'Domicilio'
+            ? `Solicitud aprobada. El donante debe entregarla antes del ${limite}`
+            : `Solicitud aprobada. ${nombre} debe recogerla antes del ${limite}`,
+        ),
       )
     } catch (error) {
       setErrorAccion({ titulo: 'No pudimos aprobar la solicitud', error })
