@@ -1,3 +1,5 @@
+import EncabezadoPagina from '../layout/EncabezadoPagina'
+
 export default function Usuarios() {
-  return <h1>Usuarios</h1>
+  return <EncabezadoPagina migas={['Inicio', 'Usuarios']} titulo="Usuarios" />
 }

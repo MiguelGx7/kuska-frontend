@@ -1,0 +1,22 @@
+.layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.layout__principal {
+  flex: 1;
+  min-width: 0;
+  padding: 24px 32px 48px;
+  background: var(--bg);
+}
+
+.layout__contenido {
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+@media (max-width: 899px) {
+  .layout__principal {
+    padding: 16px 16px 40px;
+  }
+}

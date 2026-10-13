@@ -1,6 +1,8 @@
 import { useParams } from 'react-router-dom'
+import EncabezadoPagina from '../layout/EncabezadoPagina'
 
 export default function UsuarioDetalle() {
   const { id } = useParams()
-  return <h1>Detalle de usuario #{id}</h1>
+  const titulo = `Usuario #${id}`
+  return <EncabezadoPagina migas={['Inicio', 'Usuarios', titulo]} titulo={titulo} />
 }

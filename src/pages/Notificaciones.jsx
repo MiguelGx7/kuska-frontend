@@ -1,3 +1,5 @@
+import EncabezadoPagina from '../layout/EncabezadoPagina'
+
 export default function Notificaciones() {
-  return <h1>Notificaciones</h1>
+  return <EncabezadoPagina migas={['Inicio', 'Notificaciones']} titulo="Notificaciones" />
 }

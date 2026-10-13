@@ -1,6 +1,8 @@
 import { useParams } from 'react-router-dom'
+import EncabezadoPagina from '../layout/EncabezadoPagina'
 
 export default function DonacionDetalle() {
   const { id } = useParams()
-  return <h1>Detalle de donación #{id}</h1>
+  const titulo = `Donación #${id}`
+  return <EncabezadoPagina migas={['Inicio', 'Donaciones', titulo]} titulo={titulo} />
 }

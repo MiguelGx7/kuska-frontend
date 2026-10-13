@@ -1,3 +1,5 @@
+import EncabezadoPagina from '../layout/EncabezadoPagina'
+
 export default function Novedades() {
-  return <h1>Novedades</h1>
+  return <EncabezadoPagina migas={['Inicio', 'Novedades']} titulo="Novedades" />
 }

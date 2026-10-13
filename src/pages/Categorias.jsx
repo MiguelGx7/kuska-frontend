@@ -1,3 +1,5 @@
+import EncabezadoPagina from '../layout/EncabezadoPagina'
+
 export default function Categorias() {
-  return <h1>Categorías</h1>
+  return <EncabezadoPagina migas={['Inicio', 'Categorías']} titulo="Categorías" />
 }
