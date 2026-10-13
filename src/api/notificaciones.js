@@ -12,3 +12,14 @@ export async function contarNoLeidas() {
   const { no_leidas } = await listarNotificaciones({ leida: false })
   return no_leidas
 }
+
+export async function marcarLeida(id) {
+  const { data } = await api.post(`notificaciones/${id}/leer/`)
+  return data
+}
+
+// Devuelve { marcadas, no_leidas }.
+export async function marcarTodasLeidas() {
+  const { data } = await api.post('notificaciones/leer-todas/')
+  return data
+}

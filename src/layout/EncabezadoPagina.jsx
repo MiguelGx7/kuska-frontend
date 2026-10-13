@@ -1,31 +1,17 @@
-import { Fragment, useEffect, useState } from 'react'
+import { Fragment } from 'react'
 import { Link } from 'react-router-dom'
 import { Bell, ChevronRight } from 'lucide-react'
-import { contarNoLeidas } from '../api/notificaciones'
 import BotonTema from '../components/BotonTema'
+import { useContadores } from './useContadores'
 import './EncabezadoPagina.css'
 
 // migas: lista de textos, p. ej. ["Inicio", "Donaciones"]. children: acciones a la derecha.
 // etiqueta: elemento junto al título, fuera del <h1> (p. ej. el Badge de estado).
 export default function EncabezadoPagina({ migas = [], titulo, etiqueta, subtitulo, children }) {
-  const [noLeidas, setNoLeidas] = useState(0)
-
-  // Cada página monta su encabezado, así que se recarga en cada cambio de ruta.
-  useEffect(() => {
-    let vigente = true
-    contarNoLeidas()
-      .then((cantidad) => {
-        if (vigente) setNoLeidas(cantidad ?? 0)
-      })
-      .catch(() => {
-        // Sin punto si falla: no se muestra error
-      })
-    return () => {
-      vigente = false
-    }
-  }, [])
-
-  const hayNoLeidas = noLeidas > 0
+  // Viene de ContadoresProvider: se recarga en cada cambio de ruta y se actualiza al marcar
+  // notificaciones como leídas. Si falla, queda null y no hay punto.
+  const { contadores } = useContadores()
+  const hayNoLeidas = contadores.noLeidas > 0
 
   return (
     <header className="encabezado">

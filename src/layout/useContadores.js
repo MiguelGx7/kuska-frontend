@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import { ContextoContadores } from './contextoContadores'
 
-// { contadores: { donaciones, solicitudes, novedades }, recargarContadores }
+// { contadores: { donaciones, solicitudes, novedades, noLeidas }, recargarContadores, fijarNoLeidas }
 export function useContadores() {
   const valor = useContext(ContextoContadores)
   if (!valor) {

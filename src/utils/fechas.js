@@ -50,6 +50,29 @@ function hora({ hora: h, minuto }) {
   return `${h12}:${String(minuto).padStart(2, '0')} ${sufijo}`
 }
 
+// Días de calendario en Bogotá desde la fecha hasta hoy: 0 = hoy, 1 = ayer. null si no es válida.
+export function diasDesde(iso, ahora = new Date()) {
+  const fecha = new Date(iso)
+  if (Number.isNaN(fecha.getTime())) return null
+  return diasEntre(partesBogota(fecha), partesBogota(ahora))
+}
+
+// Solo la hora: "9:42 a. m."
+export function soloHora(iso) {
+  const fecha = new Date(iso)
+  if (Number.isNaN(fecha.getTime())) return ''
+  return hora(partesBogota(fecha))
+}
+
+// Día corto de una fecha y hora: "10 oct", o "10 oct 2025" si no es este año.
+export function fechaCorta(iso, ahora = new Date()) {
+  const fecha = new Date(iso)
+  if (Number.isNaN(fecha.getTime())) return ''
+  const p = partesBogota(fecha)
+  const corta = `${p.dia} ${MESES_CORTOS[p.mes - 1]}`
+  return p.anio === partesBogota(ahora).anio ? corta : `${corta} ${p.anio}`
+}
+
 // "hace 12 minutos", "hoy, 8:15 a. m.", "ayer", "10 oct" o "10 oct 2025".
 export function fechaRelativa(iso, ahora = new Date()) {
   const fecha = new Date(iso)

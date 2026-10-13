@@ -1,0 +1,202 @@
+/* Estilos propios de Notificaciones. Lo compartido está en styles/lista.css */
+
+/* Pestañas a la izquierda y tipo a la derecha; la línea de abajo la pone la barra */
+.notificaciones__barra {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  box-shadow: inset 0 -1px 0 var(--border);
+}
+
+.notificaciones__barra .pestanas {
+  box-shadow: none;
+}
+
+.notificaciones__tipo {
+  flex-shrink: 0;
+  width: 210px;
+}
+
+/* En pantallas angostas el tipo baja debajo de las pestañas */
+@media (max-width: 640px) {
+  .notificaciones__barra {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    box-shadow: none;
+  }
+
+  .notificaciones__barra .pestanas {
+    box-shadow: inset 0 -1px 0 var(--border);
+  }
+
+  .notificaciones__tipo {
+    width: 100%;
+  }
+}
+
+/* ---- Carga ---- */
+
+.notificaciones__esqueleto {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 8px 12px;
+}
+
+.notificaciones__esqueleto-fila {
+  display: flex;
+  gap: 12px;
+}
+
+.notificaciones__esqueleto-textos {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 2px;
+}
+
+/* ---- Lista agrupada por fecha ---- */
+
+.notificaciones__grupos {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.notificaciones__rotulo {
+  margin-bottom: 6px;
+  padding: 0 12px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-3);
+}
+
+.notificaciones__items {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 0;
+  list-style: none;
+}
+
+.notificaciones-item {
+  display: flex;
+  gap: 12px;
+  padding: 12px;
+  border-radius: var(--r-control);
+}
+
+/* Fondo azul muy suave: mezcla con la superficie para que funcione en los dos temas */
+.notificaciones-item--sin-leer {
+  background: color-mix(in srgb, var(--primary-soft) 55%, var(--surface));
+}
+
+.notificaciones-item__icono {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+}
+
+.notificaciones-item__icono--azul {
+  background: var(--primary-soft);
+  color: var(--on-primary-soft);
+}
+
+.notificaciones-item__icono--naranja {
+  background: var(--naranja-bg);
+  color: var(--naranja);
+}
+
+.notificaciones-item__icono--rojo {
+  background: var(--rojo-bg);
+  color: var(--rojo);
+}
+
+.notificaciones-item__icono--gris {
+  background: var(--gris-bg);
+  color: var(--gris);
+}
+
+.notificaciones-item__cuerpo {
+  flex: 1;
+  min-width: 0;
+}
+
+.notificaciones-item__cabecera {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.notificaciones-item__titulo {
+  flex: 1;
+  min-width: 0;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.notificaciones-item--sin-leer .notificaciones-item__titulo {
+  font-weight: 600;
+}
+
+.notificaciones-item__hora {
+  flex-shrink: 0;
+  font-size: 12px;
+  color: var(--text-3);
+  white-space: nowrap;
+}
+
+.notificaciones-item__punto {
+  flex-shrink: 0;
+  align-self: center;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--primary);
+}
+
+.notificaciones-item__mensaje {
+  margin-top: 2px;
+  font-size: 14px;
+  color: var(--text-2);
+}
+
+.notificaciones-item__acciones {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 16px;
+  margin-top: 8px;
+}
+
+.notificaciones-item__enlace {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.notificaciones-item__marcar {
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--text-3);
+  font-size: 13px;
+}
+
+.notificaciones-item__marcar:hover {
+  color: var(--text);
+  text-decoration: underline;
+}
+
+.notificaciones-item__marcar:focus-visible,
+.notificaciones-item__enlace:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}

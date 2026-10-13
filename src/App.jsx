@@ -27,7 +27,7 @@ const UsuarioDetalle = lazy(() => import('./pages/usuarios/DetalleUsuario'))
 const Sanciones = lazy(() => import('./pages/sanciones/Sanciones'))
 const Categorias = lazy(() => import('./pages/categorias/Categorias'))
 const Configuracion = lazy(() => import('./pages/configuracion/Configuracion'))
-const Notificaciones = lazy(() => import('./pages/Notificaciones'))
+const Notificaciones = lazy(() => import('./pages/notificaciones/Notificaciones'))
 
 // La sesión vive dentro del router para poder usar useNavigate al cerrar sesión.
 // El toast va aquí para poder usarlo en cualquier pantalla.
