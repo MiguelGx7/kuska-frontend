@@ -1,0 +1,23 @@
+.esqueleto {
+  display: block;
+  border-radius: var(--r-badge);
+  background: linear-gradient(90deg, var(--muted) 0%, var(--border) 50%, var(--muted) 100%);
+  background-size: 200% 100%;
+  animation: esqueleto-brillo 1.4s ease-in-out infinite;
+}
+
+@keyframes esqueleto-brillo {
+  from {
+    background-position: 100% 0;
+  }
+  to {
+    background-position: -100% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .esqueleto {
+    animation: none;
+    background: var(--muted);
+  }
+}

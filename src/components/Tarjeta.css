@@ -1,0 +1,37 @@
+.tarjeta {
+  min-width: 0;
+  padding: 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-card);
+}
+
+/* Si no caben, la acción baja debajo del título en vez de apretarlo */
+.tarjeta__cabecera {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.tarjeta__cabecera > :first-child {
+  flex: 1 1 180px;
+  min-width: 0;
+}
+
+.tarjeta__titulo {
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.tarjeta__subtitulo {
+  margin-top: 2px;
+  font-size: 13px;
+  color: var(--text-3);
+}
+
+.tarjeta__accion {
+  flex-shrink: 0;
+}

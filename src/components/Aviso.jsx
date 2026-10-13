@@ -6,8 +6,8 @@ const ICONOS = {
   error: CircleAlert,
 }
 
-// tipo: info | error
-export default function Aviso({ tipo = 'info', titulo, children, className }) {
+// tipo: info | error. accion: elemento opcional debajo del texto (p. ej. un botón).
+export default function Aviso({ tipo = 'info', titulo, children, accion, className }) {
   const Icono = ICONOS[tipo] ?? Info
   const clases = ['aviso', `aviso--${tipo}`, className].filter(Boolean).join(' ')
 
@@ -17,6 +17,7 @@ export default function Aviso({ tipo = 'info', titulo, children, className }) {
       <div className="aviso__contenido">
         {titulo && <p className="aviso__titulo">{titulo}</p>}
         {children && <p className="aviso__texto">{children}</p>}
+        {accion && <div className="aviso__accion">{accion}</div>}
       </div>
     </div>
   )

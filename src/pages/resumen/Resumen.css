@@ -1,0 +1,374 @@
+.resumen {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.resumen__fila {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.resumen__titulo-seccion {
+  margin-bottom: 12px;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.resumen__vacio {
+  padding: 24px 0;
+  text-align: center;
+  font-size: 14px;
+  color: var(--text-3);
+}
+
+.resumen__esqueleto-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* ---- 1. Esperan tu revisión ---- */
+
+.revision__grilla {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+}
+
+.revision__tarjeta {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-card);
+  color: var(--text);
+  text-decoration: none;
+  transition: border-color 0.15s;
+}
+
+.revision__tarjeta:hover {
+  border-color: var(--border-strong);
+}
+
+.revision__tarjeta:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.revision__numero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  min-width: 42px;
+  height: 42px;
+  padding: 0 6px;
+  border-radius: var(--r-control);
+  background: var(--primary-soft);
+  color: var(--primary);
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.revision__numero--cero {
+  background: var(--muted);
+  color: var(--text-3);
+}
+
+.revision__textos {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  line-height: 1.35;
+}
+
+.revision__titulo {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.revision__detalle {
+  font-size: 13px;
+  color: var(--text-3);
+}
+
+/* ---- 2. Franja de totales ---- */
+
+.totales__grilla {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  row-gap: 20px;
+}
+
+.totales__item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+  padding: 0 24px;
+  border-left: 1px solid var(--border);
+}
+
+.totales__item:first-child {
+  padding-left: 0;
+  border-left: none;
+}
+
+.totales__etiqueta {
+  font-size: 13px;
+  color: var(--text-3);
+}
+
+.totales__cifra {
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.totales__mes {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-3);
+}
+
+.totales__mes--sube {
+  color: var(--verde);
+}
+
+@media (max-width: 760px) {
+  .totales__grilla {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .totales__item:nth-child(odd) {
+    padding-left: 0;
+    border-left: none;
+  }
+}
+
+/* ---- 3a. Actividad por mes ---- */
+
+.grafica {
+  flex: 1.6 1 460px;
+}
+
+.grafica__esqueleto {
+  margin-top: 16px;
+}
+
+.grafica__lienzo {
+  margin-top: 12px;
+}
+
+.leyenda {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+  padding: 0;
+  list-style: none;
+  font-size: 13px;
+  color: var(--text-2);
+}
+
+.leyenda li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.grafica__rayita {
+  display: inline-block;
+  flex-shrink: 0;
+  width: 14px;
+  height: 3px;
+  border-radius: 2px;
+}
+
+.grafica__tooltip {
+  padding: 10px 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-control);
+  box-shadow: 0 6px 16px rgb(16 24 40 / 0.12);
+  font-size: 13px;
+}
+
+.grafica__tooltip-mes {
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+.grafica__tooltip-fila {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-2);
+}
+
+.grafica__tooltip-fila strong {
+  margin-left: auto;
+  padding-left: 12px;
+  color: var(--text);
+  font-weight: 600;
+}
+
+/* Selector segmentado */
+.segmentado {
+  display: inline-flex;
+  padding: 3px;
+  background: var(--muted);
+  border: 1px solid var(--border);
+  border-radius: var(--r-control);
+}
+
+.segmentado__opcion {
+  height: 30px;
+  padding: 0 12px;
+  border: none;
+  border-radius: 7px;
+  background: none;
+  color: var(--text-2);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.segmentado__opcion:hover {
+  color: var(--text);
+}
+
+.segmentado__opcion[aria-pressed='true'] {
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: 0 1px 2px rgb(16 24 40 / 0.08);
+}
+
+.segmentado__opcion:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 1px;
+}
+
+/* ---- 3b. Por categoría ---- */
+
+.categorias {
+  flex: 1 1 320px;
+}
+
+.categorias__lista {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 16px;
+  padding: 0;
+  list-style: none;
+}
+
+.categorias__item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.categorias__fila {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 14px;
+}
+
+.categorias__nombre {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.categorias__valor {
+  flex-shrink: 0;
+  color: var(--text-3);
+}
+
+.categorias__barra {
+  position: relative;
+  height: 8px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--border);
+}
+
+.categorias__donados,
+.categorias__entregados {
+  position: absolute;
+  inset: 0 auto 0 0;
+  border-radius: 999px;
+}
+
+.categorias__donados {
+  background: var(--serie-1);
+}
+
+.categorias__entregados {
+  background: var(--primary);
+}
+
+/* ---- 4a. Entregas recientes ---- */
+
+/* La tabla necesita más ancho que la lista de notificaciones */
+.entregas {
+  flex: 2.2 1 560px;
+}
+
+/* ---- 4b. Últimas notificaciones ---- */
+
+.notificaciones {
+  flex: 1 1 300px;
+}
+
+.notificaciones__lista {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  list-style: none;
+}
+
+.notificaciones__item {
+  display: flex;
+  gap: 12px;
+  padding: 12px 0;
+  border-top: 1px solid var(--border);
+}
+
+.notificaciones__item:first-child {
+  padding-top: 0;
+  border-top: none;
+}
+
+.notificaciones__punto {
+  flex-shrink: 0;
+  width: 8px;
+  height: 8px;
+  margin-top: 7px;
+  border-radius: 50%;
+  background: var(--border-strong);
+}
+
+.notificaciones__punto--nueva {
+  background: var(--primary);
+}
+
+.notificaciones__mensaje {
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.notificaciones__fecha {
+  margin-top: 2px;
+  font-size: 12px;
+  color: var(--text-3);
+}
+
+.tarjeta__accion .boton--enlace {
+  font-size: 14px;
+}

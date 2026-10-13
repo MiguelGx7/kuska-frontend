@@ -1,0 +1,14 @@
+.cargando-pagina {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Misma altura aproximada que EncabezadoPagina (migas + botones de 40px + título) */
+.cargando-pagina__encabezado {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding-top: 12px;
+  margin-bottom: 4px;
+}

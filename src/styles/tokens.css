@@ -19,6 +19,9 @@
   --danger: #C0352B;
   --maiz: #FFC233;
 
+  /* Gráficas: la primera serie; la segunda usa --primary */
+  --serie-1: #9EC2F2;
+
   /* Estados */
   --naranja-bg: #FFF1E0;
   --naranja: #B54708;
@@ -53,6 +56,8 @@
   --primary-soft: #172E52;
   --on-primary-soft: #BFD6F8;
   --danger: #F28B82;
+
+  --serie-1: #2F5A93;
 
   /* Estados */
   --naranja-bg: #3A2410;

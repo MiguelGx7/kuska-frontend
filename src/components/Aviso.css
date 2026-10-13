@@ -21,6 +21,10 @@
   font-weight: 600;
 }
 
+.aviso__accion {
+  margin-top: 8px;
+}
+
 .aviso--info {
   background: var(--primary-soft);
   color: var(--on-primary-soft);

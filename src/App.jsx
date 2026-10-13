@@ -1,3 +1,4 @@
+import { lazy } from 'react'
 import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom'
 import RutaAdmin from './auth/RutaAdmin'
 import { SesionProvider } from './auth/SesionContext'
@@ -5,23 +6,24 @@ import { SesionProvider } from './auth/SesionContext'
 import Login from './pages/Login'
 import Recuperar from './pages/Recuperar'
 import SesionCerrada from './pages/SesionCerrada'
-
-import Resumen from './pages/Resumen'
-import Donaciones from './pages/Donaciones'
-import DonacionDetalle from './pages/DonacionDetalle'
-import Solicitudes from './pages/Solicitudes'
-import SolicitudDetalle from './pages/SolicitudDetalle'
-import Novedades from './pages/Novedades'
-import Usuarios from './pages/Usuarios'
-import UsuarioDetalle from './pages/UsuarioDetalle'
-import Sanciones from './pages/Sanciones'
-import Categorias from './pages/Categorias'
-import Configuracion from './pages/Configuracion'
-import Notificaciones from './pages/Notificaciones'
-
 import SinPermiso from './pages/SinPermiso'
 import ErrorServidor from './pages/ErrorServidor'
 import NoEncontrada from './pages/NoEncontrada'
+
+// Las páginas protegidas se descargan al entrar a ellas (Recharts solo viaja con Resumen).
+// Mientras cargan, LayoutAdmin muestra un esqueleto. Las públicas y de error son livianas: van directo.
+const Resumen = lazy(() => import('./pages/resumen/Resumen'))
+const Donaciones = lazy(() => import('./pages/Donaciones'))
+const DonacionDetalle = lazy(() => import('./pages/DonacionDetalle'))
+const Solicitudes = lazy(() => import('./pages/Solicitudes'))
+const SolicitudDetalle = lazy(() => import('./pages/SolicitudDetalle'))
+const Novedades = lazy(() => import('./pages/Novedades'))
+const Usuarios = lazy(() => import('./pages/Usuarios'))
+const UsuarioDetalle = lazy(() => import('./pages/UsuarioDetalle'))
+const Sanciones = lazy(() => import('./pages/Sanciones'))
+const Categorias = lazy(() => import('./pages/Categorias'))
+const Configuracion = lazy(() => import('./pages/Configuracion'))
+const Notificaciones = lazy(() => import('./pages/Notificaciones'))
 
 // La sesión vive dentro del router para poder usar useNavigate al cerrar sesión.
 function Raiz() {

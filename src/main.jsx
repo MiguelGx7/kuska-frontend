@@ -6,6 +6,7 @@ import '@fontsource/figtree/500.css'
 import '@fontsource/figtree/600.css'
 import './styles/tokens.css'
 import './styles/base.css'
+import './styles/tabla.css'
 
 import App from './App.jsx'
 

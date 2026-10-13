@@ -1,6 +1,8 @@
+import { Suspense } from 'react'
 import { Outlet } from 'react-router-dom'
 import * as RadixTooltip from '@radix-ui/react-tooltip'
 import BarraLateral from './BarraLateral'
+import CargandoPagina from './CargandoPagina'
 import './LayoutAdmin.css'
 
 export default function LayoutAdmin() {
@@ -10,7 +12,10 @@ export default function LayoutAdmin() {
         <BarraLateral />
         <main className="layout__principal">
           <div className="layout__contenido">
-            <Outlet />
+            {/* Solo el contenido espera la descarga de la página; la barra lateral queda fija. */}
+            <Suspense fallback={<CargandoPagina />}>
+              <Outlet />
+            </Suspense>
           </div>
         </main>
       </div>

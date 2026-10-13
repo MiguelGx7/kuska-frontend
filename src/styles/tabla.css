@@ -1,0 +1,85 @@
+/* Tablas del panel */
+
+.tabla-contenedor {
+  overflow-x: auto;
+  margin: 0 -20px;
+  padding: 0 20px;
+}
+
+/* En pantallas angostas el contenedor hace scroll en vez de aplastar columnas */
+.tabla {
+  width: 100%;
+  min-width: 600px;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.tabla th {
+  padding: 0 10px 10px;
+  border-bottom: 1px solid var(--border);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-3);
+  text-align: left;
+  white-space: nowrap;
+}
+
+.tabla td {
+  padding: 12px 10px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+}
+
+.tabla th:first-child,
+.tabla td:first-child {
+  padding-left: 0;
+}
+
+.tabla th:last-child,
+.tabla td:last-child {
+  padding-right: 0;
+}
+
+.tabla tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.tabla__fila-enlace {
+  cursor: pointer;
+}
+
+.tabla__fila-enlace:hover td {
+  background: var(--muted);
+}
+
+.tabla__principal {
+  display: block;
+  color: var(--text);
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.tabla__principal:hover {
+  color: var(--primary);
+}
+
+.tabla__principal:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.tabla__secundario {
+  display: block;
+  margin-top: 2px;
+  font-size: 12px;
+  color: var(--text-3);
+}
+
+.tabla__texto-2 {
+  color: var(--text-2);
+}
+
+.tabla__sin-salto {
+  white-space: nowrap;
+}
