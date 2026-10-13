@@ -6,7 +6,8 @@ import BotonTema from '../components/BotonTema'
 import './EncabezadoPagina.css'
 
 // migas: lista de textos, p. ej. ["Inicio", "Donaciones"]. children: acciones a la derecha.
-export default function EncabezadoPagina({ migas = [], titulo, subtitulo, children }) {
+// etiqueta: elemento junto al título, fuera del <h1> (p. ej. el Badge de estado).
+export default function EncabezadoPagina({ migas = [], titulo, etiqueta, subtitulo, children }) {
   const [noLeidas, setNoLeidas] = useState(0)
 
   // Cada página monta su encabezado, así que se recarga en cada cambio de ruta.
@@ -67,7 +68,10 @@ export default function EncabezadoPagina({ migas = [], titulo, subtitulo, childr
 
       <div className="encabezado__principal">
         <div className="encabezado__textos">
-          <h1 className="encabezado__titulo">{titulo}</h1>
+          <div className="encabezado__titulo-fila">
+            <h1 className="encabezado__titulo">{titulo}</h1>
+            {etiqueta}
+          </div>
           {subtitulo && <p className="encabezado__subtitulo">{subtitulo}</p>}
         </div>
         {children && <div className="encabezado__acciones">{children}</div>}

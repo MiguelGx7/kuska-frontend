@@ -1,0 +1,58 @@
+/* La línea de abajo es una sombra interior: así el borde de la pestaña activa se pinta
+   encima sin desbordar el contenedor (un margen negativo hacía aparecer scroll vertical). */
+.pestanas {
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  box-shadow: inset 0 -1px 0 var(--border);
+  scrollbar-width: thin;
+}
+
+.pestanas__pestana {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  height: 42px;
+  padding: 0 12px;
+  border: none;
+  border-bottom: 2px solid transparent;
+  background: none;
+  color: var(--text-2);
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.pestanas__pestana:hover {
+  color: var(--text);
+}
+
+.pestanas__pestana[aria-selected='true'] {
+  border-bottom-color: var(--primary);
+  color: var(--text);
+}
+
+.pestanas__pestana:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: -2px;
+  border-radius: 6px 6px 0 0;
+}
+
+.pestanas__contador {
+  min-width: 22px;
+  padding: 1px 7px;
+  border-radius: 999px;
+  background: var(--gris-bg);
+  color: var(--text-2);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.pestanas__pestana[aria-selected='true'] .pestanas__contador {
+  background: var(--primary-soft);
+  color: var(--on-primary-soft);
+}

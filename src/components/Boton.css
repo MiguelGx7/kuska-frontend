@@ -19,6 +19,18 @@
   height: 40px;
 }
 
+.boton--pequeno {
+  height: 34px;
+  padding: 0 12px;
+  gap: 6px;
+  font-size: 14px;
+}
+
+.boton--pequeno .boton__icono {
+  width: 16px;
+  height: 16px;
+}
+
 .boton:focus-visible {
   outline: 2px solid var(--primary);
   outline-offset: 2px;

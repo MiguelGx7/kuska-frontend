@@ -58,7 +58,7 @@ function guardarContraida(valor) {
 
 export default function BarraLateral() {
   const { usuario, nombre, cerrarSesion } = useSesion()
-  const contadores = useContadores()
+  const { contadores } = useContadores()
   const { pathname } = useLocation()
   const [contraida, setContraida] = useState(contraidaInicial)
 

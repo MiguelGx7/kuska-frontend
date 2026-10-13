@@ -83,6 +83,38 @@ export function mesLargo(aaaamm) {
   return nombre ? `${nombre} ${anio}` : ''
 }
 
+function dosDigitos(n) {
+  return String(n).padStart(2, '0')
+}
+
+// Fecha de hoy en Bogotá: "2026-10-13"
+export function hoyBogota(ahora = new Date()) {
+  const { anio, mes, dia } = partesBogota(ahora)
+  return `${anio}-${dosDigitos(mes)}-${dosDigitos(dia)}`
+}
+
+// ("2026-10-13", 2) → "2026-10-15". Trabaja con fechas sin hora.
+export function sumarDias(aaaammdd, dias) {
+  const [anio, mes, dia] = aaaammdd.split('-').map(Number)
+  return new Date(Date.UTC(anio, mes - 1, dia + dias)).toISOString().slice(0, 10)
+}
+
+// Fecha sin hora (p. ej. un vencimiento): "12 de octubre", o "12 de octubre de 2027" si no es este año.
+export function fechaDia(aaaammdd, ahora = new Date()) {
+  const [anio, mes, dia] = (aaaammdd ?? '').split('-').map(Number)
+  if (!anio || !mes || !dia) return ''
+  const texto = `${dia} de ${MESES_LARGOS[mes - 1].toLowerCase()}`
+  return anio === partesBogota(ahora).anio ? texto : `${texto} de ${anio}`
+}
+
+// Fecha sin hora, corta: "12 oct", o "12 oct 2027" si no es este año.
+export function fechaDiaCorta(aaaammdd, ahora = new Date()) {
+  const [anio, mes, dia] = (aaaammdd ?? '').split('-').map(Number)
+  if (!anio || !mes || !dia) return ''
+  const texto = `${dia} ${MESES_CORTOS[mes - 1]}`
+  return anio === partesBogota(ahora).anio ? texto : `${texto} ${anio}`
+}
+
 // "Martes 13 de octubre"
 export function hoyLargo(ahora = new Date()) {
   const { anio, mes, dia } = partesBogota(ahora)

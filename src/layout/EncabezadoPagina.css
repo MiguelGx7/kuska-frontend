@@ -88,6 +88,13 @@
   min-width: 0;
 }
 
+.encabezado__titulo-fila {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 12px;
+}
+
 .encabezado__titulo {
   font-size: 26px;
   font-weight: 600;

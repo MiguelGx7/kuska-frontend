@@ -28,6 +28,31 @@
   box-shadow: 0 0 0 1px var(--primary);
 }
 
+/* Variante para <textarea>: alto libre */
+.campo__control--area {
+  height: auto;
+  padding: 10px 12px;
+}
+
+.campo__control--area .campo__input {
+  min-height: 96px;
+  resize: vertical;
+  line-height: 1.5;
+}
+
+.campo__pie {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.campo__contador {
+  flex-shrink: 0;
+  margin-left: auto;
+  font-size: 13px;
+  color: var(--text-3);
+}
+
 .campo__icono {
   flex-shrink: 0;
   color: var(--text-3);

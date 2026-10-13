@@ -2,6 +2,7 @@ import { lazy } from 'react'
 import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom'
 import RutaAdmin from './auth/RutaAdmin'
 import { SesionProvider } from './auth/SesionContext'
+import { ToastProvider } from './components/toast/ToastProvider'
 
 import Login from './pages/Login'
 import Recuperar from './pages/Recuperar'
@@ -13,8 +14,8 @@ import NoEncontrada from './pages/NoEncontrada'
 // Las páginas protegidas se descargan al entrar a ellas (Recharts solo viaja con Resumen).
 // Mientras cargan, LayoutAdmin muestra un esqueleto. Las públicas y de error son livianas: van directo.
 const Resumen = lazy(() => import('./pages/resumen/Resumen'))
-const Donaciones = lazy(() => import('./pages/Donaciones'))
-const DonacionDetalle = lazy(() => import('./pages/DonacionDetalle'))
+const Donaciones = lazy(() => import('./pages/donaciones/ListaDonaciones'))
+const DonacionDetalle = lazy(() => import('./pages/donaciones/DetalleDonacion'))
 const Solicitudes = lazy(() => import('./pages/Solicitudes'))
 const SolicitudDetalle = lazy(() => import('./pages/SolicitudDetalle'))
 const Novedades = lazy(() => import('./pages/Novedades'))
@@ -26,10 +27,13 @@ const Configuracion = lazy(() => import('./pages/Configuracion'))
 const Notificaciones = lazy(() => import('./pages/Notificaciones'))
 
 // La sesión vive dentro del router para poder usar useNavigate al cerrar sesión.
+// El toast va aquí para poder usarlo en cualquier pantalla.
 function Raiz() {
   return (
     <SesionProvider>
-      <Outlet />
+      <ToastProvider>
+        <Outlet />
+      </ToastProvider>
     </SesionProvider>
   )
 }

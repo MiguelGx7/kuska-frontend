@@ -1,0 +1,135 @@
+.modal__fondo {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  background: rgb(16 24 40 / 0.5);
+  animation: modal-aparecer 0.15s ease-out;
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 41;
+  display: flex;
+  flex-direction: column;
+  width: min(480px, calc(100vw - 32px));
+  max-height: calc(100vh - 32px);
+  padding: 24px;
+  overflow-y: auto;
+  transform: translate(-50%, -50%);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-modal);
+  box-shadow: 0 20px 48px rgb(16 24 40 / 0.18);
+  animation: modal-entrar 0.18s ease-out;
+}
+
+.modal:focus {
+  outline: none;
+}
+
+.modal__cabecera {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.modal__titulo {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.modal__cerrar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  margin: -4px -8px 0 0;
+  padding: 0;
+  border: none;
+  border-radius: 8px;
+  background: none;
+  color: var(--text-3);
+}
+
+.modal__cerrar:hover {
+  background: var(--muted);
+  color: var(--text);
+}
+
+.modal__cerrar:focus-visible {
+  outline: 2px solid var(--primary);
+}
+
+.modal__descripcion {
+  margin-top: 6px;
+  font-size: 14px;
+  color: var(--text-2);
+}
+
+.modal__cuerpo {
+  margin-top: 20px;
+}
+
+.modal__pie {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 24px;
+}
+
+/* Foto en grande */
+.modal--imagen {
+  width: auto;
+  max-width: calc(100vw - 32px);
+  padding: 12px;
+}
+
+.modal--imagen .modal__cabecera {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.modal--imagen .modal__cerrar {
+  margin: 0;
+  background: rgb(16 24 40 / 0.6);
+  color: #FFFFFF;
+}
+
+.modal--imagen .modal__cuerpo {
+  margin-top: 0;
+}
+
+.modal--imagen img {
+  max-width: min(900px, calc(100vw - 56px));
+  max-height: calc(100vh - 56px);
+  border-radius: var(--r-control);
+  object-fit: contain;
+}
+
+@keyframes modal-aparecer {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes modal-entrar {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -48%) scale(0.98);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .modal,
+  .modal__fondo {
+    animation: none;
+  }
+}

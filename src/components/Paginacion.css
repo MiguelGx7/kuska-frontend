@@ -1,0 +1,26 @@
+.paginacion {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+
+.paginacion__texto {
+  font-size: 13px;
+  color: var(--text-3);
+}
+
+.paginacion__botones {
+  display: flex;
+  gap: 8px;
+}
+
+/* El texto del botón va en un span; la flecha queda a la derecha */
+.paginacion__botones .boton span {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
