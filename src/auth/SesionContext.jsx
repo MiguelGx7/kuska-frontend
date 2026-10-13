@@ -28,12 +28,17 @@ export function SesionProvider({ children }) {
     return datosUsuario
   }, [])
 
-  // El backend no tiene endpoint de logout: basta con borrar los tokens.
-  const cerrarSesion = useCallback(() => {
+  // Borra la sesión de este navegador sin navegar (p. ej. tras recuperar la contraseña).
+  const olvidarSesion = useCallback(() => {
     borrarSesion()
     setUsuario(null)
+  }, [])
+
+  // El backend no tiene endpoint de logout: basta con borrar los tokens.
+  const cerrarSesion = useCallback(() => {
+    olvidarSesion()
     navigate('/login', { replace: true })
-  }, [navigate])
+  }, [navigate, olvidarSesion])
 
   const valor = useMemo(
     () => ({
@@ -42,8 +47,9 @@ export function SesionProvider({ children }) {
       autenticado: usuario?.rol === ROL_ADMIN,
       iniciarSesion,
       cerrarSesion,
+      olvidarSesion,
     }),
-    [usuario, iniciarSesion, cerrarSesion],
+    [usuario, iniciarSesion, cerrarSesion, olvidarSesion],
   )
 
   return <SesionContext.Provider value={valor}>{children}</SesionContext.Provider>

@@ -1,0 +1,108 @@
+/* Recuperar contraseña. El layout (panel azul y zona del formulario) viene de Login.css */
+
+.recuperar__paso {
+  margin-bottom: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-3);
+}
+
+.recuperar__correo {
+  font-weight: 600;
+  color: var(--text);
+  overflow-wrap: anywhere;
+}
+
+.recuperar__cambiar {
+  font-size: inherit;
+}
+
+.recuperar__boton {
+  width: 100%;
+}
+
+.recuperar__volver {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.recuperar__volver .boton {
+  font-size: 14px;
+}
+
+/* ---- Código ---- */
+
+.recuperar__codigo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.recuperar-codigo .campo__control {
+  height: 52px;
+}
+
+/* El letter-spacing deja aire después del último dígito: el text-indent lo compensa al centrar */
+.recuperar-codigo .campo__input {
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: 12px;
+  text-align: center;
+  text-indent: 12px;
+}
+
+.recuperar__vence {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px 12px;
+  font-size: 13px;
+  color: var(--text-3);
+}
+
+.recuperar__reenviar {
+  font-size: 13px;
+}
+
+.recuperar__reenviar:disabled {
+  opacity: 1;
+  color: var(--text-3);
+  text-decoration: none;
+  cursor: default;
+}
+
+.recuperar__reenviado {
+  font-size: 13px;
+  color: var(--verde);
+}
+
+.recuperar__reenviado:empty {
+  display: none;
+}
+
+/* ---- Listo ---- */
+
+.recuperar__listo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.recuperar__listo-icono {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  margin-bottom: 20px;
+  border-radius: 50%;
+  background: var(--verde-bg);
+  color: var(--verde);
+}
+
+.recuperar__listo .login__titulo:focus {
+  outline: none;
+}

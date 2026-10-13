@@ -187,7 +187,12 @@ export default function Login() {
             />
 
             <div className="login__olvido">
-              <Boton variante="enlace" to="/recuperar">
+              {/* Si ya escribió el correo, Recuperar lo trae puesto. */}
+              <Boton
+                variante="enlace"
+                to="/recuperar"
+                state={correo.trim() ? { correo: correo.trim() } : undefined}
+              >
                 ¿Olvidaste tu contraseña?
               </Boton>
             </div>

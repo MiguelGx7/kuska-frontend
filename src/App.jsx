@@ -8,7 +8,7 @@ import SinConexion from './components/SinConexion'
 import { ToastProvider } from './components/toast/ToastProvider'
 
 import Login from './pages/Login'
-import Recuperar from './pages/Recuperar'
+import Recuperar from './pages/recuperar/Recuperar'
 import SesionCerrada from './pages/errores/SesionCerrada'
 import SinPermiso from './pages/errores/SinPermiso'
 import ErrorServidor from './pages/errores/ErrorServidor'
