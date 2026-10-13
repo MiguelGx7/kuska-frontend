@@ -1,0 +1,65 @@
+/* Pantallas de lista: tarjeta con pestañas, buscador, tabla y paginación */
+
+.lista {
+  padding-top: 8px;
+}
+
+.lista__panel {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-top: 16px;
+}
+
+.lista__buscador {
+  max-width: 400px;
+}
+
+.lista__esqueleto {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Mientras llega otra página se deja la anterior atenuada */
+.lista__recargando {
+  opacity: 0.55;
+  transition: opacity 0.15s;
+}
+
+/* Celda con miniatura + textos */
+.celda-miniatura {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 220px;
+}
+
+.celda-miniatura__textos {
+  min-width: 0;
+}
+
+.miniatura {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  object-fit: cover;
+  background: var(--muted);
+}
+
+.miniatura--vacia {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-3);
+}
+
+.tabla__bloque {
+  display: block;
+}
+
+.tabla__accion {
+  text-align: right;
+  white-space: nowrap;
+}

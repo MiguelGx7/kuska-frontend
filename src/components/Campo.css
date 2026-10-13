@@ -46,6 +46,11 @@
   gap: 12px;
 }
 
+.campo__opcional {
+  font-weight: 400;
+  color: var(--text-3);
+}
+
 .campo__contador {
   flex-shrink: 0;
   margin-left: auto;

@@ -1,25 +1,11 @@
-import { Mail, MessageCircle, Phone } from 'lucide-react'
-import Boton from '../../components/Boton'
+import BotonesContacto from '../../components/BotonesContacto'
 import Tarjeta from '../../components/Tarjeta'
-import { enlaceCorreo, enlaceLlamar, enlaceWhatsApp } from '../../utils/contacto'
 import { fechaRelativa } from '../../utils/fechas'
+import { inicialesDe } from '../../utils/nombres'
 import { MODALIDAD_LARGA } from './donacion'
-
-function inicialesDe(nombre) {
-  const letras = (nombre ?? '')
-    .split(/\s+/)
-    .filter(Boolean)
-    .slice(0, 2)
-    .map((parte) => parte[0])
-    .join('')
-  return letras.toUpperCase() || '?'
-}
 
 export default function LateralDonacion({ donacion }) {
   const { donante } = donacion
-  const llamar = enlaceLlamar(donante?.telefono)
-  const whatsapp = enlaceWhatsApp(donante?.telefono)
-  const correo = enlaceCorreo(donante?.correo, `Kumora · donación «${donacion.titulo}»`)
 
   return (
     <div className="detalle__lateral">
@@ -45,30 +31,11 @@ export default function LateralDonacion({ donacion }) {
           </div>
         </dl>
 
-        <div className="lateral__botones">
-          {llamar && (
-            <Boton variante="secundario" tamano="pequeno" icono={Phone} href={llamar}>
-              Llamar
-            </Boton>
-          )}
-          {whatsapp && (
-            <Boton
-              variante="secundario"
-              tamano="pequeno"
-              icono={MessageCircle}
-              href={whatsapp}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              WhatsApp
-            </Boton>
-          )}
-          {correo && (
-            <Boton variante="secundario" tamano="pequeno" icono={Mail} href={correo}>
-              Correo
-            </Boton>
-          )}
-        </div>
+        <BotonesContacto
+          telefono={donante?.telefono}
+          correo={donante?.correo}
+          asunto={`Kumora · donación «${donacion.titulo}»`}
+        />
       </Tarjeta>
 
       <Tarjeta className="lateral" titulo="Entrega">

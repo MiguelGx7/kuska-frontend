@@ -1,0 +1,133 @@
+/* Estilos propios de Solicitudes. Lo compartido está en styles/lista.css y styles/detalle.css */
+
+/* ---- Lista ---- */
+
+.solicitudes__vence-hoy {
+  color: var(--rojo);
+  font-weight: 600;
+}
+
+.solicitudes__confirmacion {
+  display: block;
+  margin-top: 4px;
+  font-size: 12px;
+  color: var(--text-3);
+  white-space: nowrap;
+}
+
+.solicitudes__confirmacion--reclamo {
+  color: var(--rojo);
+  font-weight: 500;
+}
+
+/* ---- Detalle: alimentos pedidos ---- */
+
+.pedidos {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  list-style: none;
+}
+
+.pedido {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 0;
+  border-top: 1px solid var(--border);
+}
+
+.pedido:first-child {
+  padding-top: 0;
+  border-top: none;
+}
+
+.pedido__foto {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  object-fit: cover;
+  background: var(--muted);
+}
+
+.pedido__textos {
+  flex: 1;
+  min-width: 0;
+}
+
+.pedido__nombre {
+  font-weight: 500;
+}
+
+.pedido__nota {
+  font-size: 13px;
+  color: var(--text-3);
+}
+
+.pedido__cantidad {
+  flex-shrink: 0;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.pedido--retirado .pedido__foto {
+  opacity: 0.5;
+}
+
+.pedido--retirado .pedido__nombre,
+.pedido--retirado .pedido__cantidad {
+  color: var(--text-3);
+  text-decoration: line-through;
+}
+
+/* ---- Detalle: reclamo ---- */
+
+.reclamo__comentario {
+  font-style: italic;
+}
+
+.reclamo__contacto {
+  margin-top: 4px;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.reclamo__contacto .botones-contacto {
+  margin-top: 8px;
+}
+
+/* ---- Menú Sancionar ---- */
+
+.menu__disparador {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.menu {
+  z-index: 45;
+  min-width: 180px;
+  padding: 6px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-control);
+  box-shadow: 0 12px 28px rgb(16 24 40 / 0.16);
+}
+
+.menu__opcion {
+  display: flex;
+  align-items: center;
+  height: 36px;
+  padding: 0 10px;
+  border-radius: 6px;
+  color: var(--text);
+  font-size: 14px;
+  text-decoration: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.menu__opcion[data-highlighted] {
+  background: var(--muted);
+}

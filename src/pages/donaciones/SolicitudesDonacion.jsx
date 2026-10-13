@@ -61,7 +61,7 @@ export default function SolicitudesDonacion({ idDonacion }) {
       )}
 
       {!datos && carga.estado === 'cargando' && (
-        <div className="donaciones__esqueleto" aria-busy="true">
+        <div className="lista__esqueleto" aria-busy="true">
           {[0, 1, 2].map((i) => (
             <Esqueleto key={i} alto={48} />
           ))}

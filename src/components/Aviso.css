@@ -15,6 +15,7 @@
   display: flex;
   flex-direction: column;
   gap: 2px;
+  min-width: 0;
 }
 
 .aviso__titulo {
@@ -35,6 +36,17 @@
   color: var(--rojo);
 }
 
-.aviso--error .aviso__texto {
+.aviso--advertencia {
+  background: var(--naranja-bg);
+  color: var(--naranja);
+}
+
+.aviso--error .aviso__texto,
+.aviso--advertencia .aviso__texto {
   color: var(--text);
+}
+
+/* Varios párrafos dentro del aviso */
+.aviso__texto > * + * {
+  margin-top: 6px;
 }

@@ -1,0 +1,30 @@
+.caja {
+  padding: 14px 16px;
+  border-radius: var(--r-control);
+  font-size: 14px;
+}
+
+.caja__titulo {
+  margin-bottom: 2px;
+  font-weight: 600;
+}
+
+.caja--rojo {
+  background: var(--rojo-bg);
+}
+
+.caja--rojo .caja__titulo {
+  color: var(--rojo);
+}
+
+.caja--gris {
+  background: var(--gris-bg);
+}
+
+.caja--azul {
+  background: var(--primary-soft);
+}
+
+.caja--azul .caja__titulo {
+  color: var(--on-primary-soft);
+}

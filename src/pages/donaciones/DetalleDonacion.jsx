@@ -7,7 +7,9 @@ import { obtenerMensajeError } from '../../api/errores'
 import Aviso from '../../components/Aviso'
 import Badge from '../../components/Badge'
 import Boton from '../../components/Boton'
+import Caja from '../../components/Caja'
 import Esqueleto from '../../components/Esqueleto'
+import ModalTexto from '../../components/ModalTexto'
 import { useToast } from '../../components/toast/useToast'
 import { useCarga } from '../../hooks/useCarga'
 import EncabezadoPagina from '../../layout/EncabezadoPagina'
@@ -17,7 +19,6 @@ import { fechaDia, fechaRelativa, hoyBogota, sumarDias } from '../../utils/fecha
 import AlimentosDonacion from './AlimentosDonacion'
 import { alimentosActivos, textoAlimentos, textoDias } from './donacion'
 import LateralDonacion from './LateralDonacion'
-import ModalRechazo from './ModalRechazo'
 import SolicitudesDonacion from './SolicitudesDonacion'
 import './Donaciones.css'
 
@@ -188,10 +189,9 @@ export default function DetalleDonacion() {
         )}
 
         {donacion.estado === 'Rechazada' && donacion.motivo_rechazo && (
-          <div className="motivo-rechazo">
-            <p className="motivo-rechazo__titulo">Motivo del rechazo</p>
-            <p>{donacion.motivo_rechazo}</p>
-          </div>
+          <Caja tono="rojo" titulo="Motivo del rechazo">
+            {donacion.motivo_rechazo}
+          </Caja>
         )}
       </div>
 
@@ -206,11 +206,20 @@ export default function DetalleDonacion() {
 
       {CON_SOLICITUDES.includes(donacion.estado) && <SolicitudesDonacion idDonacion={donacion.id} />}
 
-      <ModalRechazo
+      <ModalTexto
         abierto={rechazoAbierto}
         alCambiar={setRechazoAbierto}
-        donacion={donacion}
-        alRechazar={rechazar}
+        titulo="Rechazar donación"
+        descripcion={`«${donacion.titulo}» de ${donacion.donante?.nombre ?? 'el donante'}. El donante verá el motivo y no podrá reenviarla; tendrá que crear una nueva.`}
+        etiqueta="Motivo del rechazo"
+        placeholder="La foto del queso no permite ver su estado. Crea una nueva donación con una foto clara."
+        obligatorio
+        mensajeVacio="Escribe el motivo del rechazo."
+        textoBoton="Rechazar donación"
+        varianteBoton="peligro"
+        campoApi="motivo_rechazo"
+        tituloError="No pudimos rechazar la donación"
+        alEnviar={rechazar}
       />
     </>
   )

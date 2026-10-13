@@ -1,16 +1,32 @@
 import { useId, useRef, useState } from 'react'
-import { obtenerMensajeError } from '../../api/errores'
-import Aviso from '../../components/Aviso'
-import Boton from '../../components/Boton'
-import Modal from '../../components/Modal'
+import { obtenerMensajeError } from '../api/errores'
+import Aviso from './Aviso'
+import Boton from './Boton'
+import Modal from './Modal'
 
 const MAXIMO = 255
 
-// alRechazar(motivo) hace la petición; si falla, el error se muestra dentro del modal.
-export default function ModalRechazo({ abierto, alCambiar, donacion, alRechazar }) {
+// Modal con un texto libre (motivo, observación, respuesta) y un botón de confirmar.
+// alEnviar(texto) hace la petición; si falla, el error se muestra dentro del modal:
+// el del campo `campoApi` debajo del textarea, cualquier otro en un aviso.
+export default function ModalTexto({
+  abierto,
+  alCambiar,
+  titulo,
+  descripcion,
+  etiqueta,
+  placeholder,
+  obligatorio = false,
+  mensajeVacio,
+  textoBoton,
+  varianteBoton = 'principal',
+  campoApi,
+  tituloError,
+  alEnviar,
+}) {
   const idCampo = useId()
   const refCampo = useRef(null)
-  const [motivo, setMotivo] = useState('')
+  const [texto, setTexto] = useState('')
   const [errorCampo, setErrorCampo] = useState(null)
   const [errorApi, setErrorApi] = useState(null)
   const [enviando, setEnviando] = useState(false)
@@ -19,7 +35,7 @@ export default function ModalRechazo({ abierto, alCambiar, donacion, alRechazar 
     if (enviando) return
     if (!valor) {
       // Al cerrar se limpia para la próxima vez.
-      setMotivo('')
+      setTexto('')
       setErrorCampo(null)
       setErrorApi(null)
     }
@@ -28,9 +44,9 @@ export default function ModalRechazo({ abierto, alCambiar, donacion, alRechazar 
 
   async function enviar(e) {
     e.preventDefault()
-    const limpio = motivo.trim()
-    if (!limpio) {
-      setErrorCampo('Escribe el motivo del rechazo.')
+    const limpio = texto.trim()
+    if (obligatorio && !limpio) {
+      setErrorCampo(mensajeVacio)
       refCampo.current?.focus()
       return
     }
@@ -38,11 +54,10 @@ export default function ModalRechazo({ abierto, alCambiar, donacion, alRechazar 
     setErrorApi(null)
     setEnviando(true)
     try {
-      await alRechazar(limpio)
-      setMotivo('')
+      await alEnviar(limpio)
+      setTexto('')
     } catch (error) {
-      // Un error del campo va debajo del campo; el resto, en un aviso.
-      const delCampo = error?.response?.data?.motivo_rechazo
+      const delCampo = campoApi ? error?.response?.data?.[campoApi] : null
       if (Array.isArray(delCampo) && delCampo.length) {
         setErrorCampo(delCampo.join(' '))
         refCampo.current?.focus()
@@ -57,28 +72,24 @@ export default function ModalRechazo({ abierto, alCambiar, donacion, alRechazar 
   const idMensaje = `${idCampo}-mensaje`
 
   return (
-    <Modal
-      abierto={abierto}
-      alCambiar={cambiarAbierto}
-      titulo="Rechazar donación"
-      descripcion={`«${donacion.titulo}» de ${donacion.donante?.nombre ?? 'el donante'}. El donante verá el motivo y no podrá reenviarla; tendrá que crear una nueva.`}
-    >
-      <form id={`${idCampo}-form`} onSubmit={enviar} noValidate>
+    <Modal abierto={abierto} alCambiar={cambiarAbierto} titulo={titulo} descripcion={descripcion}>
+      <form onSubmit={enviar} noValidate>
         <div className={`campo ${errorCampo ? 'campo--error' : ''}`}>
           <label className="campo__etiqueta" htmlFor={idCampo}>
-            Motivo del rechazo
+            {etiqueta}
+            {!obligatorio && <span className="campo__opcional"> (opcional)</span>}
           </label>
           <div className="campo__control campo__control--area">
             <textarea
               ref={refCampo}
               id={idCampo}
               className="campo__input"
-              value={motivo}
+              value={texto}
               maxLength={MAXIMO}
               rows={4}
-              placeholder="La foto del queso no permite ver su estado. Crea una nueva donación con una foto clara."
+              placeholder={placeholder}
               onChange={(e) => {
-                setMotivo(e.target.value)
+                setTexto(e.target.value)
                 setErrorCampo(null)
                 setErrorApi(null)
               }}
@@ -89,13 +100,13 @@ export default function ModalRechazo({ abierto, alCambiar, donacion, alRechazar 
           <div className="campo__pie" id={idMensaje}>
             {errorCampo && <p className="campo__mensaje">{errorCampo}</p>}
             <span className="campo__contador">
-              {motivo.length}/{MAXIMO}
+              {texto.length}/{MAXIMO}
             </span>
           </div>
         </div>
 
         {errorApi && (
-          <Aviso tipo="error" titulo="No pudimos rechazar la donación" className="modal__aviso">
+          <Aviso tipo="error" titulo={tituloError} className="modal__aviso">
             {obtenerMensajeError(errorApi)}
           </Aviso>
         )}
@@ -104,8 +115,8 @@ export default function ModalRechazo({ abierto, alCambiar, donacion, alRechazar 
           <Boton variante="secundario" onClick={() => cambiarAbierto(false)} disabled={enviando}>
             Cancelar
           </Boton>
-          <Boton type="submit" variante="peligro" cargando={enviando}>
-            Rechazar donación
+          <Boton type="submit" variante={varianteBoton} cargando={enviando}>
+            {textoBoton}
           </Boton>
         </div>
       </form>

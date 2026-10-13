@@ -115,6 +115,36 @@ export function fechaDiaCorta(aaaammdd, ahora = new Date()) {
   return anio === partesBogota(ahora).anio ? texto : `${texto} ${anio}`
 }
 
+// ¿La fecha y hora cae hoy en Bogotá?
+export function esHoy(iso, ahora = new Date()) {
+  const fecha = new Date(iso)
+  if (Number.isNaN(fecha.getTime())) return false
+  const p = partesBogota(fecha)
+  const hoy = partesBogota(ahora)
+  return p.anio === hoy.anio && p.mes === hoy.mes && p.dia === hoy.dia
+}
+
+// Plazos, donde importa la hora: "hoy, 6:00 p. m." o "15 oct, 6:00 p. m." (con el año si no es este).
+export function fechaHora(iso, ahora = new Date()) {
+  const fecha = new Date(iso)
+  if (Number.isNaN(fecha.getTime())) return ''
+  const p = partesBogota(fecha)
+  if (esHoy(iso, ahora)) return `hoy, ${hora(p)}`
+  const dia = `${p.dia} ${MESES_CORTOS[p.mes - 1]}`
+  const conAnio = p.anio === partesBogota(ahora).anio ? dia : `${dia} ${p.anio}`
+  return `${conAnio}, ${hora(p)}`
+}
+
+// Para frases: "15 de octubre a las 6:00 p. m." (con "de 2027" si no es este año).
+export function fechaHoraLarga(iso, ahora = new Date()) {
+  const fecha = new Date(iso)
+  if (Number.isNaN(fecha.getTime())) return ''
+  const p = partesBogota(fecha)
+  const dia = `${p.dia} de ${MESES_LARGOS[p.mes - 1].toLowerCase()}`
+  const conAnio = p.anio === partesBogota(ahora).anio ? dia : `${dia} de ${p.anio}`
+  return `${conAnio} a las ${hora(p)}`
+}
+
 // "Martes 13 de octubre"
 export function hoyLargo(ahora = new Date()) {
   const { anio, mes, dia } = partesBogota(ahora)

@@ -7,6 +7,8 @@ import '@fontsource/figtree/600.css'
 import './styles/tokens.css'
 import './styles/base.css'
 import './styles/tabla.css'
+import './styles/lista.css'
+import './styles/detalle.css'
 
 import App from './App.jsx'
 
