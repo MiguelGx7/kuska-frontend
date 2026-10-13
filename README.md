@@ -1,86 +1,85 @@
-# Red de Alimentos Solidarios — Frontend
+# Kumora · Panel de administración
 
-Interfaz web de la plataforma **Red de Alimentos Solidarios**, construida en **React**, que consume el backend en Django.
+Frontend web de **Kumora (Red de Alimentos Solidarios)**. Es el panel desde donde el **Administrador** valida donaciones, gestiona solicitudes, usuarios, sanciones y categorías, y revisa el resumen de la plataforma.
 
-## Descripción
+Donantes y beneficiarios no usan este panel: ellos usan la app de Kumora. Si alguien con otro rol intenta entrar aquí, el login lo rechaza.
 
-Plataforma para facilitar la donación de alimentos: los donantes registran alimentos disponibles, los beneficiarios consultan y solicitan donaciones, y los administradores validan, gestionan y registran las entregas.
+- **Frontend:** Vite + React 19 (JavaScript, `.jsx`), CSS con variables (tema claro y oscuro)
+- **Backend:** Django REST con JWT → `https://kuska-backend-production.up.railway.app/api`
 
-## Roles del sistema
+## Requisitos
 
-| Rol | Puede... |
-|---|---|
-| Donante | Registrar alimentos disponibles y su cantidad |
-| Beneficiario | Consultar donaciones y realizar solicitudes |
-| Administrador | Validar donaciones, gestionar solicitudes y registrar entregas |
-
-## Tecnologías
-
-- **React**
-- Consumo de API REST (backend en Django)
-
-## Requisitos previos
-
-- Node.js 18+
-- npm o yarn
-- Backend corriendo (local o desplegado) — ver repo `backend`
+- Node.js 20 o superior
+- npm
 
 ## Instalación
 
 ```bash
-git clone <url-del-repo>
-cd <nombre-del-repo>
-
 npm install
+cp .env.example .env   # en Windows (PowerShell): Copy-Item .env.example .env
+npm run dev
 ```
 
-## Configuración
+La app queda en `http://localhost:5173`.
 
-Crea un archivo `.env` en la raíz del proyecto:
+### Variables de entorno
 
-```env
-REACT_APP_API_URL=http://localhost:8000/api
-```
+| Variable       | Descripción                         |
+| -------------- | ----------------------------------- |
+| `VITE_API_URL` | URL base de la API, sin `/` al final |
 
-Ajusta la URL según dónde tengas corriendo el backend.
+### Scripts
 
-## Ejecutar en desarrollo
+| Comando           | Qué hace                                |
+| ----------------- | --------------------------------------- |
+| `npm run dev`     | Servidor de desarrollo                  |
+| `npm run build`   | Compila para producción en `dist/`      |
+| `npm run preview` | Sirve la versión compilada              |
+| `npm run lint`    | Revisa el código con ESLint             |
 
-```bash
-npm start
-```
-
-La app quedará disponible en `http://localhost:3000/`.
-
-## Build de producción
-
-```bash
-npm run build
-```
-
-## Estructura del proyecto
+## Estructura de carpetas
 
 ```
+public/
+  favicon.svg            Símbolo de Kumora
 src/
-├── components/      # Componentes reutilizables
-├── pages/           # Vistas por rol (Donante, Beneficiario, Administrador)
-├── services/        # Llamadas al API
-├── context/         # Manejo de sesión / autenticación
-└── App.jsx
+  api/
+    cliente.js           Instancia de axios, tokens y refresh automático
+    errores.js           obtenerMensajeError(error): texto legible de cualquier error de la API
+    auth.js              login(correo, contrasena)
+    *.js                 Un archivo por recurso (donaciones, solicitudes, usuarios…)
+  auth/
+    SesionContext.jsx    SesionProvider: usuario actual, iniciar y cerrar sesión
+    useSesion.js         Hook para leer la sesión
+    RutaAdmin.jsx        Protege las rutas privadas
+    contexto.js          El contexto de React de la sesión
+    usuario.js           ROL_ADMIN y nombreCompleto(usuario)
+  components/            Componentes reutilizables
+  layout/                Estructura del panel (barra lateral, encabezado)
+  pages/                 Una página por ruta
+  styles/
+    tokens.css           Colores, radios y fuente (claro y oscuro)
+    base.css             Reset y estilos globales
+  tema.js                Leer, guardar y aplicar el tema
+  App.jsx                Rutas
+  main.jsx               Punto de entrada
 ```
 
-## Funcionalidades principales
+## Sesión y autenticación
 
-- Registro e inicio de sesión según rol
-- Dashboard con donaciones recibidas, donaciones entregadas, solicitudes pendientes y personas beneficiadas
-- Formulario de registro de donaciones (con catálogo de alimentos + opción "Otro")
-- Listado y solicitud de donaciones disponibles
-- Panel de administración para validar donaciones, gestionar solicitudes y registrar entregas
+- El login (`POST auth/login/`) devuelve `access`, `refresh` y `usuario`. Solo se guardan si `usuario.rol` es `"Administrador"`.
+- Los tokens y el usuario se guardan en `localStorage`.
+- Si una petición responde 401, el cliente renueva los tokens una sola vez con `POST auth/refresh/`, y las peticiones que fallen al mismo tiempo esperan ese mismo refresh. Si el refresh falla, se borra la sesión y se redirige a `/sesion-cerrada`.
+- Cerrar sesión borra los tokens y lleva a `/login`; el backend no tiene endpoint de logout.
 
-## Autores
+## Rutas
 
-- Miguel Angel Gomez
+| Tipo       | Rutas |
+| ---------- | ----- |
+| Públicas   | `/login`, `/recuperar`, `/sesion-cerrada` |
+| Protegidas | `/`, `/donaciones`, `/donaciones/:id`, `/solicitudes`, `/solicitudes/:id`, `/novedades`, `/usuarios`, `/usuarios/:id`, `/sanciones`, `/categorias`, `/configuracion`, `/notificaciones` |
+| Errores    | `/sin-permiso` (403), `/error` (500), cualquier otra (404) |
 
-## Licencia
+## Tema
 
-Este proyecto está bajo la licencia MIT — ver el archivo [LICENSE](LICENSE) para más detalles.
+El tema se aplica con `data-theme="light" | "dark"` en `<html>` y se guarda en `localStorage`. Si no hay nada guardado, se usa la preferencia del sistema (`prefers-color-scheme`).
