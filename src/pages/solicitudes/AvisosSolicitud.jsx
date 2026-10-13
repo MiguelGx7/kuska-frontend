@@ -17,7 +17,7 @@ export default function AvisosSolicitud({ solicitud, novedad }) {
           tipo="advertencia"
           titulo="Detenida por una novedad sin revisar"
           accion={
-            <Boton variante="enlace" to="/novedades">
+            <Boton variante="enlace" to={`/novedades?id=${novedad.id}`}>
               Revisar novedad
             </Boton>
           }

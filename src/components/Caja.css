@@ -17,6 +17,19 @@
   color: var(--rojo);
 }
 
+.caja--verde {
+  background: var(--verde-bg);
+}
+
+.caja--verde .caja__titulo {
+  color: var(--verde);
+}
+
+.caja--suave {
+  background: var(--muted);
+  border: 1px solid var(--border);
+}
+
 .caja--gris {
   background: var(--gris-bg);
 }

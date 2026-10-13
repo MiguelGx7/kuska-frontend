@@ -5,6 +5,11 @@ const BASE_URL = import.meta.env.VITE_API_URL
 const CLAVE_ACCESS = 'kumora.access'
 const CLAVE_REFRESH = 'kumora.refresh'
 const CLAVE_USUARIO = 'kumora.usuario'
+const CLAVE_VOLVER_A = 'kumora.volverA'
+
+// 403 que significa "esta cuenta ya no es de administrador" (p. ej. le cambiaron el rol).
+// Otros 403, como una cuenta bloqueada, se muestran donde ocurren.
+const DETALLE_SOLO_ADMIN = 'Esta acción es solo para administradores.'
 
 // Rutas que no llevan token ni disparan el refresh ante un 401.
 // Sin token: un access viejo guardado haría que el backend rechace el login.
@@ -106,15 +111,53 @@ function refrescarTokens() {
   return refreshEnCurso
 }
 
+// Ruta a la que volver después de iniciar sesión otra vez (sessionStorage: solo esta pestaña).
+function guardarRutaDeVuelta() {
+  const { pathname, search, hash } = window.location
+  if (pathname === '/login' || pathname === '/sesion-cerrada') return
+  try {
+    sessionStorage.setItem(CLAVE_VOLVER_A, `${pathname}${search}${hash}`)
+  } catch {
+    // Sin sessionStorage, el login vuelve al inicio
+  }
+}
+
+// Lee y borra la ruta guardada. La usa la página de sesión cerrada.
+export function tomarRutaDeVuelta() {
+  try {
+    const ruta = sessionStorage.getItem(CLAVE_VOLVER_A)
+    sessionStorage.removeItem(CLAVE_VOLVER_A)
+    return ruta
+  } catch {
+    return null
+  }
+}
+
 function cerrarSesionExpirada() {
+  guardarRutaDeVuelta()
   borrarSesion()
   window.location.replace('/sesion-cerrada')
+}
+
+function cerrarSesionSinPermiso() {
+  borrarSesion()
+  window.location.replace('/sin-permiso')
 }
 
 api.interceptors.response.use(
   (respuesta) => respuesta,
   async (error) => {
     const original = error.config
+
+    if (
+      error.response?.status === 403 &&
+      error.response.data?.detail === DETALLE_SOLO_ADMIN &&
+      original &&
+      !esRutaPublica(original.url)
+    ) {
+      cerrarSesionSinPermiso()
+      return Promise.reject(error)
+    }
 
     if (
       error.response?.status !== 401 ||

@@ -11,7 +11,10 @@ const ESPERA_BUSQUEDA_MS = 300
 //        o { confirmacion: 'Reclamada' }. "Todas" lleva un marcador: { estado: 'Todas' }.
 //   api: parámetros para la API (por defecto, los mismos de url). Para "Todas": {}.
 // Si la URL no coincide con ninguna pestaña, se usa la primera.
-export function useFiltrosUrl(pestanas) {
+//
+// opciones.limpiarAlCambiar: otros parámetros que se quitan al cambiar de pestaña
+//   (p. ej. ['id'] para soltar el elemento seleccionado).
+export function useFiltrosUrl(pestanas, { limpiarAlCambiar = [] } = {}) {
   const [params, setParams] = useSearchParams()
 
   const claves = [...new Set(pestanas.flatMap((p) => Object.keys(p.url)))]
@@ -55,8 +58,19 @@ export function useFiltrosUrl(pestanas) {
     setParams((actuales) => {
       const nuevos = new URLSearchParams(actuales)
       claves.forEach((k) => nuevos.delete(k))
+      limpiarAlCambiar.forEach((k) => nuevos.delete(k))
       Object.entries(destino.url).forEach(([k, v]) => nuevos.set(k, v))
       nuevos.delete('page')
+      return nuevos
+    })
+  }
+
+  // Elemento seleccionado (?id=). Agrega una entrada al historial: el botón atrás vuelve.
+  function seleccionar(id) {
+    setParams((actuales) => {
+      const nuevos = new URLSearchParams(actuales)
+      if (id == null) nuevos.delete('id')
+      else nuevos.set('id', String(id))
       return nuevos
     })
   }
@@ -78,6 +92,8 @@ export function useFiltrosUrl(pestanas) {
     setTexto,
     cambiarPestana,
     cambiarPagina,
+    id: params.get('id'),
+    seleccionar,
     // Parámetros para la API (sin claves vacías).
     paramsApi: {
       ...(pestana.api ?? pestana.url),

@@ -1,0 +1,106 @@
+.pagina-error {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: var(--bg);
+}
+
+/* Dentro del layout ocupa el área de contenido, no la pantalla */
+.pagina-error--en-layout {
+  min-height: calc(100vh - 72px);
+  background: none;
+}
+
+.pagina-error__franja {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 24px;
+}
+
+.pagina-error__logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.pagina-error__contenido {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 24px 16px 64px;
+  text-align: center;
+}
+
+.pagina-error__contenido svg {
+  margin-bottom: 20px;
+}
+
+.pagina-error__codigo {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  color: var(--text-3);
+}
+
+.pagina-error__codigo--rojo {
+  color: var(--rojo);
+}
+
+.pagina-error__titulo {
+  margin-top: 8px;
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.pagina-error__texto {
+  margin-top: 12px;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text-2);
+}
+
+.pagina-error__botones {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.pagina-error__botones .boton {
+  height: 44px;
+  padding: 0 20px;
+}
+
+.pagina-error__nota {
+  margin-top: 20px;
+  font-size: 13px;
+  color: var(--text-3);
+}
+
+/* En pantallas angostas los botones se apilan a lo ancho, con el principal arriba */
+@media (max-width: 480px) {
+  .pagina-error__titulo {
+    font-size: 26px;
+  }
+
+  .pagina-error__botones {
+    flex-direction: column-reverse;
+    align-self: stretch;
+  }
+
+  .pagina-error__botones .boton {
+    width: 100%;
+  }
+}
