@@ -17,7 +17,9 @@ export function SesionProvider({ children }) {
 
     // Los tokens de otros roles se descartan sin guardarse.
     if (datosUsuario?.rol !== ROL_ADMIN) {
-      throw new Error(MENSAJE_SOLO_ADMIN)
+      const error = new Error(MENSAJE_SOLO_ADMIN)
+      error.codigo = 'ROL_NO_ADMIN'
+      throw error
     }
 
     guardarTokens({ access, refresh })

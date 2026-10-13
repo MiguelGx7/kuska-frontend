@@ -1,0 +1,178 @@
+.login {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ---- Panel izquierdo (marca) ---- */
+
+.login__marca {
+  --login-marca: #1766D6;
+
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px;
+  overflow: hidden;
+  background: var(--login-marca);
+  color: #FFFFFF;
+}
+
+[data-theme="dark"] .login__marca {
+  --login-marca: #12305C;
+}
+
+/* Círculos decorativos */
+.login__marca::before,
+.login__marca::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  background: rgb(255 255 255 / 0.08);
+}
+
+.login__marca::before {
+  width: 420px;
+  height: 420px;
+  top: -140px;
+  right: -160px;
+}
+
+.login__marca::after {
+  width: 300px;
+  height: 300px;
+  bottom: -120px;
+  left: -100px;
+}
+
+.login__marca-contenido {
+  position: relative;
+  max-width: 400px;
+}
+
+.login__mascota {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  height: 200px;
+  margin-bottom: 32px;
+  border-radius: 50%;
+  background: #E6F0FF;
+}
+
+.login__marca-titulo {
+  font-size: 30px;
+  margin-bottom: 8px;
+}
+
+.login__marca-subtitulo {
+  font-size: 17px;
+  color: rgb(255 255 255 / 0.85);
+  margin-bottom: 28px;
+}
+
+.login__beneficios {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 0;
+  list-style: none;
+}
+
+.login__beneficios li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 500;
+}
+
+.login__check {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgb(255 255 255 / 0.18);
+}
+
+/* ---- Panel derecho (formulario) ---- */
+
+.login__zona {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 72px 16px 40px;
+  background: var(--surface);
+}
+
+.login__tema {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+}
+
+.login__caja {
+  width: 100%;
+  max-width: 380px;
+}
+
+.login__logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 32px;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.login__titulo {
+  font-size: 26px;
+  margin-bottom: 4px;
+}
+
+.login__descripcion {
+  color: var(--text-2);
+  margin-bottom: 28px;
+}
+
+.login__formulario {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.login__olvido {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: -6px;
+  font-size: 14px;
+}
+
+.login__olvido .boton {
+  font-size: 14px;
+}
+
+.login__enviar {
+  width: 100%;
+}
+
+.login__pie {
+  margin-top: 24px;
+  text-align: center;
+  font-size: 14px;
+  color: var(--text-3);
+}
+
+/* ---- Pantallas angostas: solo el formulario ---- */
+
+@media (max-width: 899px) {
+  .login__marca {
+    display: none;
+  }
+}

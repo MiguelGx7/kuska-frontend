@@ -1,0 +1,89 @@
+.boton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 38px;
+  padding: 0 16px;
+  border: 1px solid transparent;
+  border-radius: var(--r-control);
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+  text-decoration: none;
+  transition: background-color 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.boton--grande {
+  height: 40px;
+}
+
+.boton:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.boton:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.boton__icono {
+  flex-shrink: 0;
+}
+
+/* Principal: azul relleno */
+.boton--principal {
+  background: var(--primary);
+  color: var(--on-primary);
+}
+
+.boton--principal:hover:not(:disabled) {
+  background: var(--primary-hover);
+}
+
+/* Secundario: superficie con borde */
+.boton--secundario {
+  background: var(--surface);
+  border-color: var(--border-strong);
+  color: var(--text);
+}
+
+.boton--secundario:hover:not(:disabled) {
+  background: var(--muted);
+}
+
+/* Enlace: solo texto azul */
+.boton--enlace {
+  height: auto;
+  padding: 0;
+  background: none;
+  color: var(--primary);
+}
+
+.boton--enlace:hover:not(:disabled) {
+  color: var(--primary-hover);
+  text-decoration: underline;
+}
+
+/* Peligro suave: borde y texto rojo */
+.boton--peligro-suave {
+  background: var(--surface);
+  border-color: var(--rojo);
+  color: var(--rojo);
+}
+
+.boton--peligro-suave:hover:not(:disabled) {
+  background: var(--rojo-bg);
+}
+
+/* Peligro: rojo relleno */
+.boton--peligro {
+  background: var(--danger);
+  color: var(--on-primary);
+}
+
+.boton--peligro:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--danger) 85%, var(--text));
+}

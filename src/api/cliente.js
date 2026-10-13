@@ -6,8 +6,13 @@ const CLAVE_ACCESS = 'kumora.access'
 const CLAVE_REFRESH = 'kumora.refresh'
 const CLAVE_USUARIO = 'kumora.usuario'
 
-// Rutas en las que un 401 no debe disparar el refresh.
-const RUTAS_SIN_REFRESH = ['auth/login/', 'auth/refresh/']
+// Rutas que no llevan token ni disparan el refresh ante un 401.
+// Sin token: un access viejo guardado haría que el backend rechace el login.
+const RUTAS_PUBLICAS = ['auth/login/', 'auth/refresh/']
+
+function esRutaPublica(url) {
+  return RUTAS_PUBLICAS.some((ruta) => url?.includes(ruta))
+}
 
 // ---- Almacenamiento de la sesión (localStorage con try/catch) ----
 
@@ -74,7 +79,7 @@ export const api = axios.create({ baseURL: BASE_URL })
 
 api.interceptors.request.use((config) => {
   const access = obtenerAccess()
-  if (access) {
+  if (access && !esRutaPublica(config.url)) {
     config.headers.Authorization = `Bearer ${access}`
   }
   return config
@@ -110,13 +115,12 @@ api.interceptors.response.use(
   (respuesta) => respuesta,
   async (error) => {
     const original = error.config
-    const esRutaSinRefresh = RUTAS_SIN_REFRESH.some((ruta) => original?.url?.includes(ruta))
 
     if (
       error.response?.status !== 401 ||
       !original ||
       original._reintentada ||
-      esRutaSinRefresh ||
+      esRutaPublica(original.url) ||
       !obtenerRefresh()
     ) {
       return Promise.reject(error)
